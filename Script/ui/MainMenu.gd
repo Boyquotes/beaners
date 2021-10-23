@@ -1,6 +1,6 @@
 extends MarginContainer
 
-onready var world = load("res:///Scene/worlds/Void.tscn")
+onready var world = preload("res:///Scene/worlds/Void.tscn")
 onready var selector_play = $"CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3/HBoxContainer/PlaySelector"
 onready var selector_options = $"CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer2/HBoxContainer/OptionsSelector" 
 onready var selector_quit = $"CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer/HBoxContainer/QuitSelector"

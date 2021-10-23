@@ -4,12 +4,13 @@ A multiplayer open-source game where you play as beans with your friends!
 ## Implementations To-Do
 - Multiplayer             
 - Interactable Objects          
+- ~~Sounds~~ DONE          
 - ~~Artwork~~ DONE            
 - ~~Basic movements~~ DONE             
 - ~~User interface~~ DONE             
 
 ## Debugging/Releasing
-NOTE: You must change the icon path on the Project Settings and export configurations to prevent having issues during export!
+NOTE: If you want to export the game as release, you might have to create export presets for each platforms.
 
 ### In Godot
 Just press the Play button on the top right of the Editor window to export as debug

@@ -7,6 +7,9 @@ onready var selector_resume = $"CenterContainer/VBoxContainer/CenterContainer2/V
 onready var selector_options = $"CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer2/HBoxContainer/OptionsSelector" 
 onready var selector_mmenu = $"CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer4/HBoxContainer/MMenuSelector"
 onready var selector_quit = $"CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer/HBoxContainer/QuitSelector"
+onready var navigate_sfx = $"NavigateSfx"
+onready var select_sfx = $"SelectSfx"
+onready var back_sfx = $"BackSfx"
 
 var current_selection = 0
 
@@ -15,7 +18,7 @@ func _ready():
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_cancel"):
-		yield(get_tree().create_timer(100), "timeout")
+		back_sfx.play()
 		current_selection = 0
 		handle_selection()
 	
@@ -29,6 +32,8 @@ func _process(_delta):
 		handle_selection()
 
 func handle_selection():
+	select_sfx.play()
+	
 	if current_selection == 0:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		queue_free()
@@ -42,6 +47,7 @@ func handle_selection():
 		get_tree().quit()
 
 func update_current_selection():
+	navigate_sfx.play()
 	var selection = current_selection
 	selector_resume.set_text("")
 	selector_options.set_text("")

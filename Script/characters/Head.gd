@@ -11,9 +11,10 @@ onready var third_person_camera = $"ThirdPersonCamera"
 var camera_rotation_x = 0
 
 func _process(_delta):
-	if Input.is_action_just_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("ui_cancel") and is_visible():
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		get_parent().add_child(pmenu.instance())
+		set_visible(false)
 	
 	if Input.is_action_just_pressed("ui_perspective"):
 		if first_person_camera.is_current():

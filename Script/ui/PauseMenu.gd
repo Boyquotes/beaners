@@ -36,6 +36,7 @@ func handle_selection():
 	
 	if current_selection == 0:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		get_node("/root/World/Player/Head").set_visible(true)
 		queue_free()
 	elif current_selection == 1:
 		print("Options coming soon!")
@@ -47,12 +48,12 @@ func handle_selection():
 		get_tree().quit()
 
 func update_current_selection():
-	navigate_sfx.play()
 	var selection = current_selection
 	selector_resume.set_text("")
 	selector_options.set_text("")
 	selector_mmenu.set_text("")
 	selector_quit.set_text("")
+	navigate_sfx.play()
 	
 	if selection == 0:
 		selector_resume.set_text(">")

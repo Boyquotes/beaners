@@ -37,6 +37,7 @@ material/0 = SubResource( 3 )
 
 [node name="Lighting" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, -0.88094, 0.473227, 0, -0.473227, -0.88094, 0, 0, 0 )
+shadow_enabled = true
 directional_shadow_mode = 1
 directional_shadow_blend_splits = true
 directional_shadow_depth_range = 1

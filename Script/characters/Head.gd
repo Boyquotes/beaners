@@ -1,5 +1,7 @@
 extends Spatial
 
+const pmenu = preload("res://Scene/ui/PauseMenu.tscn")
+
 export var mouse_sensitivity = 0.150
 
 onready var player = get_parent()
@@ -10,10 +12,8 @@ var camera_rotation_x = 0
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_cancel"):
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		elif Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		get_parent().add_child(pmenu.instance())
 	
 	if Input.is_action_just_pressed("ui_perspective"):
 		if first_person_camera.is_current():

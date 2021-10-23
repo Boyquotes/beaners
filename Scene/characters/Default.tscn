@@ -12,6 +12,7 @@ radius = 0.75
 mid_height = 1.25
 
 [sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.286275, 0.0980392, 0.0980392, 1 )
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )

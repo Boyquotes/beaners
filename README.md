@@ -4,9 +4,9 @@ A multiplayer open-source game where you play as beans with your friends!
 ## Implementations To-Do
 - Multiplayer             
 - Interactable Objects          
-~~- Artwork~~ DONE            
-~~- Basic movements~~ DONE             
-~~- User interface~~ DONE             
+- ~~Artwork~~ DONE            
+- ~~Basic movements~~ DONE             
+- ~~User interface~~ DONE             
 
 ## Debugging/Releasing
 NOTE: You must change the icon path on the Project Settings and export configurations to prevent having issues during export!

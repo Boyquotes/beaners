@@ -13,7 +13,7 @@ A multiplayer open-source game where you play as beans with your friends!
 NOTE: If you want to export the game as release, you might have to create export presets for each platforms.
 
 ### In Godot
-Just press the Play button on the top right of the Editor window to export as debug
+Just press the Play button on the top right of the Editor window to export as debug                 
 or Go to Project > Export to export the game as release and suit your needs.
 
 ### In command-line

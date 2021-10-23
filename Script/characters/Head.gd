@@ -21,7 +21,7 @@ func _process(_delta):
 			first_person_camera.make_current()
 
 func _input(event):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(deg2rad(-event.relative.x * mouse_sensitivity))
 		player.rotate_y(deg2rad(-event.relative.x * mouse_sensitivity))
 		var x_delta = event.relative.y * mouse_sensitivity

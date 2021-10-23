@@ -15,6 +15,7 @@ func _ready():
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_cancel"):
+		yield(get_tree().create_timer(100), "timeout")
 		current_selection = 0
 		handle_selection()
 	

@@ -70,10 +70,10 @@ Controls:
 
 [Advanced Movements]
 \"Ctrl\" - Crouch
-\"Left Shift\" or \"Left Alt\" - Sprint
+\"Left Shift\" - Sprint
 
 [Misc]
-\"Esc\" - Re-gain mouse
+\"Esc\" - Pause game
 \"R\" - Reset player to it's default position
 \"TAB\" - Change player perspective"
 align = 1

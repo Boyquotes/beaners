@@ -1,10 +1,9 @@
 extends Spatial
 
-const pmenu = preload("res://Scene/ui/PauseMenu.tscn")
-
 export var mouse_sensitivity = 0.150
 
 onready var player = get_parent()
+onready var pmenu = load("res://Scene/ui/PauseMenu.tscn")
 onready var first_person_camera = $"FirstPersonCamera"
 onready var third_person_camera = $"ThirdPersonCamera"
 

@@ -1,6 +1,7 @@
 extends MarginContainer
 
-onready var mmenu = load("res:///Scene/ui/MainMenu.tscn")
+const mmenu = preload("res:///Scene/ui/MainMenu.tscn")
+
 onready var world = $"../../"
 onready var selector_resume = $"CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3/HBoxContainer/ResumeSelector"
 onready var selector_options = $"CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer2/HBoxContainer/OptionsSelector" 

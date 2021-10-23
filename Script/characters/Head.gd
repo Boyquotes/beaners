@@ -31,5 +31,7 @@ func _input(event):
 		var x_delta = event.relative.y * mouse_sensitivity
 		
 		if camera_rotation_x + x_delta > -90 and camera_rotation_x + x_delta < 90:
-			first_person_camera.rotate_x(deg2rad(-x_delta))
+			if first_person_camera.is_current():
+				first_person_camera.rotate_x(deg2rad(-x_delta))
+			
 			camera_rotation_x += x_delta

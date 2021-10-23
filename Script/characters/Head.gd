@@ -4,6 +4,7 @@ export var mouse_sensitivity = 0.150
 
 onready var player = get_parent()
 onready var pmenu = load("res://Scene/ui/PauseMenu.tscn")
+onready var target = $"Target"
 onready var first_person_camera = $"FirstPersonCamera"
 onready var third_person_camera = $"ThirdPersonCamera"
 
@@ -16,8 +17,10 @@ func _process(_delta):
 	
 	if Input.is_action_just_pressed("ui_perspective"):
 		if first_person_camera.is_current():
+			target.set_visible(false)
 			third_person_camera.make_current()
 		elif third_person_camera.is_current():
+			target.set_visible(true)
 			first_person_camera.make_current()
 
 func _input(event):

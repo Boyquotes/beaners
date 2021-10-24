@@ -15,7 +15,8 @@ config/description="A multiplayer game where you play as a bean with your friend
 run/main_scene="res://Scene/ui/MainMenu.tscn"
 boot_splash/image="res://Assets/splash.png"
 boot_splash/use_filter=false
-config/icon="res://icon-128.png"
+config/icon="res://icon.png"
+config/windows_native_icon="res://Assets/icon-windows.ico"
 
 [input]
 

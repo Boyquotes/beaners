@@ -7,10 +7,16 @@ export var jump_power = 30
 
 onready var head = $"Head"
 onready var third_person_camera = $"Head/ThirdPersonCamera"
+onready var debug_overlay = $"../DebugOverlay"
 
 var velocity = Vector3()
 
 func _ready():
+	var debug_overlay = load("res:///Scene/ui/DebugOverlay.tscn").instance()
+	debug_overlay.add_statistics("Position", self, "translation", false)
+	debug_overlay.add_statistics("Velocity", self, "velocity", false)
+	add_child(debug_overlay)
+	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta):

@@ -1,5 +1,7 @@
 extends MarginContainer
 
+var world = preload("res:///Scene/worlds/Void.tscn")
+
 onready var play = $"CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3/HBoxContainer/Play"
 onready var options = $"CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer2/HBoxContainer/Options"
 onready var help = $"CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer4/HBoxContainer/Help"
@@ -31,7 +33,7 @@ func _process(_delta):
 
 func handle_selection():
 	if current_selection == 0:
-		var _scene = get_tree().change_scene("res:///Scene/worlds/Void.tscn")
+		var _scene = get_tree().change_scene_to(world)
 	elif current_selection == 1:
 		print("Options coming soon!")
 	elif current_selection == 2:

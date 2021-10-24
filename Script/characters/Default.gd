@@ -12,10 +12,8 @@ onready var debug_overlay = $"../DebugOverlay"
 var velocity = Vector3()
 
 func _ready():
-	var debug_overlay = load("res:///Scene/ui/DebugOverlay.tscn").instance()
 	debug_overlay.add_statistics("Position", self, "translation", false)
 	debug_overlay.add_statistics("Velocity", self, "velocity", false)
-	add_child(debug_overlay)
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 

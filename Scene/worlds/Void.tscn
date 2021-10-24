@@ -37,7 +37,7 @@ directional_shadow_blend_splits = true
 directional_shadow_depth_range = 1
 
 [node name="Tutorial" parent="." instance=ExtResource( 4 )]
-transform = Transform( 0.5, 4.37114e-08, 4.37114e-08, 4.37114e-08, -0.5, 0, 4.37114e-08, 3.82137e-15, -0.5, 0, -0.985, -5.269 )
+transform = Transform( 0.5, -4.37114e-08, -4.37114e-08, -4.37114e-08, -0.5, 0, -4.37114e-08, 3.82137e-15, -0.5, 0, -0.985, -5.269 )
 
 [node name="Box" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.58242, -1.78553, 1.63262 )

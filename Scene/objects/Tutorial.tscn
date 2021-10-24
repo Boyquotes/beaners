@@ -1,19 +1,19 @@
 [gd_scene load_steps=2 format=2]
 
 [sub_resource type="ViewportTexture" id=1]
-viewport_path = NodePath("TutorialBox/TutorialFrame")
+viewport_path = NodePath("TutorialFrame")
 
 [node name="Tutorial" type="Spatial"]
 
 [node name="TutorialBox" type="Sprite3D" parent="."]
 texture = SubResource( 1 )
 
-[node name="TutorialFrame" type="Viewport" parent="TutorialBox"]
+[node name="TutorialFrame" type="Viewport" parent="."]
 size = Vector2( 800, 600 )
 hdr = false
 usage = 3
 
-[node name="TutorialText" type="Label" parent="TutorialBox/TutorialFrame"]
+[node name="TutorialText" type="Label" parent="TutorialFrame"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 text = "Welcome to Beaners!

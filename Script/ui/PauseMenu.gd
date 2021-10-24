@@ -1,7 +1,5 @@
 extends MarginContainer
 
-const mmenu = preload("res:///Scene/ui/MainMenu.tscn")
-
 onready var world = $"../../"
 onready var selector_resume = $"CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3/HBoxContainer/ResumeSelector"
 onready var selector_options = $"CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer2/HBoxContainer/OptionsSelector" 
@@ -41,7 +39,7 @@ func handle_selection():
 	elif current_selection == 1:
 		print("Options coming soon!")
 	elif current_selection == 2:
-		get_tree().root.add_child(mmenu.instance())
+		var _scene = get_tree().change_scene("res:///Scene/ui/MainMenu.tscn")
 		world.queue_free()
 		queue_free()
 	elif current_selection == 3:

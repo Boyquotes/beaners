@@ -1,6 +1,5 @@
 extends MarginContainer
 
-onready var world = preload("res:///Scene/worlds/Void.tscn")
 onready var selector_play = $"CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3/HBoxContainer/PlaySelector"
 onready var selector_options = $"CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer2/HBoxContainer/OptionsSelector" 
 onready var selector_quit = $"CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer/HBoxContainer/QuitSelector"
@@ -28,8 +27,7 @@ func handle_selection():
 	select_sfx.play()
 	
 	if current_selection == 0:
-		get_parent().add_child(world.instance())
-		queue_free()
+		var _scene = get_tree().change_scene("res:///Scene/worlds/Void.tscn")
 	elif current_selection == 1:
 		print("Options coming soon!")
 	elif current_selection == 2:

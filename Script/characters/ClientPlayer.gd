@@ -2,7 +2,7 @@ extends KinematicBody
 
 export var speed = 7
 export var acceleration = 5
-export var gravity = 1.00
+export var gravity = 0.98
 export var jump_power = 30
 
 onready var head = $"Head"
@@ -39,11 +39,11 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("game_jump") and is_on_floor():
 		velocity.y += jump_power
 	
-	if Input.is_action_just_pressed("game_crouch"):
+	if Input.is_action_just_pressed("game_crouch") and is_on_floor():
 		set_scale(Vector3(1, 0.5, 1))
 		third_person_camera.set_rotation_degrees(Vector3(-10, 0, 0))
 		speed -= 4
-	elif Input.is_action_just_released("game_crouch"):
+	elif Input.is_action_just_released("game_crouch") and is_on_floor():
 		set_scale(Vector3(1, 1, 1))
 		third_person_camera.set_rotation_degrees(Vector3(-30, 0, 0))
 		speed += 4

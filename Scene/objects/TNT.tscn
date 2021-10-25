@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Script/objects/TNT.gd" type="Script" id=1]
 [ext_resource path="res://Assets/sfx/TNT-Explosion.wav" type="AudioStream" id=2]
+[ext_resource path="res://Assets/animations/TNT-Explode.tres" type="Animation" id=3]
 
 [sub_resource type="BoxShape" id=1]
 margin = 0.001
@@ -30,6 +31,9 @@ stream = ExtResource( 2 )
 unit_db = 50.0
 max_db = 5.0
 attenuation_filter_db = 0.0
+
+[node name="ExplosionAnim" type="AnimationPlayer" parent="."]
+anims/TNT-Explode = ExtResource( 3 )
 
 [node name="ExplosionTrigger" type="Area" parent="."]
 monitorable = false

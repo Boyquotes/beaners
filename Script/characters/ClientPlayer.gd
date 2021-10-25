@@ -4,6 +4,7 @@ export var speed = 10
 export var acceleration = 5
 export var gravity = 0.98
 export var jump_power = 30
+export var health = 100
 
 onready var head = $"Head"
 onready var third_person_camera = $"Head/ThirdPersonCamera"
@@ -26,6 +27,9 @@ func _physics_process(delta):
 	if not head.is_visible():
 		return
 	
+	if get_translation().y < -50:
+		set_translation(Vector3(1, 0, 1))
+	
 	if (Input.is_action_pressed("game_up")
 	   or Input.is_action_pressed("game_down")
 	   or Input.is_action_pressed("game_left")
@@ -44,7 +48,7 @@ func _physics_process(delta):
 		direction += head_basis.x
 	
 	if Input.is_action_just_pressed("game_sprint"):
-		speed = 14
+		speed = 15
 		walk_anim.set_speed_scale(1.250)
 	elif Input.is_action_just_released("game_sprint"):
 		walk_anim.set_speed_scale(1)
@@ -56,18 +60,30 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("game_crouch") and is_on_floor():
 		set_scale(Vector3(1, 0.5, 1))
 		third_person_camera.set_rotation_degrees(Vector3(-10, 0, 0))
-		walk_sfx.set_pitch_scale(0.8)
+		walk_anim.set_speed_scale(0.8)
 		speed = 6
 	elif Input.is_action_just_released("game_crouch") and is_on_floor():
 		set_scale(Vector3(1, 1, 1))
 		third_person_camera.set_rotation_degrees(Vector3(-30, 0, 0))
-		walk_sfx.set_pitch_scale(1)
+		walk_anim.set_speed_scale(1)
 		speed = 10
 	
 	if Input.is_action_pressed("game_reset"):
-		set_translation(Vector3(1, 1, 1))
+		set_translation(Vector3(1, 0, 1))
 	
 	direction = direction.normalized()
 	velocity = velocity.linear_interpolate(direction * speed, acceleration * delta)
 	velocity.y -= gravity
-	velocity = move_and_slide(velocity, Vector3.UP)
+	velocity = move_and_slide(velocity, Vector3.UP, true)
+
+func set_health(hp: float):
+	health = hp
+	
+	if health < 1:
+		die()
+
+func die():
+	head.set_visible(false)
+	yield(get_tree().create_timer(5.0), "timeout")
+	set_translation(Vector3(1, 0, 1))
+	head.set_visible(true)

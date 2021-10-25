@@ -9,6 +9,6 @@ func _ready():
 func _process(_delta):
 	if Input.is_action_pressed("ui_debug"):
 		if not debug_overlay_label.is_visible():
-			debug_overlay_label.show()
+			debug_overlay_label.set_visible(true)
 		else:
-			debug_overlay_label.hide()
+			debug_overlay_label.set_visible(false)

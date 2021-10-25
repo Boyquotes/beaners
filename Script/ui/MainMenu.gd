@@ -27,6 +27,50 @@ func _process(_delta):
 		select_sfx.play()
 		handle_selection()
 
+func _on_Play_gui_input(event):
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			select_sfx.play()
+			current_selection = 0
+			update_current_selection()
+			
+			if event.doubleclick:
+				select_sfx.play()
+				handle_selection()
+
+func _on_Options_gui_input(event):
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			select_sfx.play()
+			current_selection = 1
+			update_current_selection()
+			
+			if event.doubleclick:
+				select_sfx.play()
+				handle_selection()
+
+func _on_Help_gui_input(event):
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			select_sfx.play()
+			current_selection = 2
+			update_current_selection()
+			
+			if event.doubleclick:
+				select_sfx.play()
+				handle_selection()
+
+func _on_Quit_gui_input(event):
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			select_sfx.play()
+			current_selection = 3
+			update_current_selection()
+			
+			if event.doubleclick or play.is_hovered:
+				select_sfx.play()
+				handle_selection()
+
 func handle_selection():
 	if current_selection == 0:
 		var _scene = get_tree().change_scene_to(world)

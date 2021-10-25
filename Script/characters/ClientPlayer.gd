@@ -93,8 +93,10 @@ func decrease_health(hp: int):
 
 func die():
 	head.set_visible(false)
+	set_visible(false)
 	yield(get_tree().create_timer(5.0), "timeout")
-	set_translation(Vector3(1, 0, 1))
 	health = 100
+	set_translation(Vector3(1, 0, 1))
 	hud_overlay.set_health(100)
 	head.set_visible(true)
+	set_visible(true)

@@ -33,6 +33,50 @@ func _process(_delta):
 		select_sfx.play()
 		handle_selection()
 
+func _on_Resume_gui_input(event):
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			select_sfx.play()
+			current_selection = 0
+			update_current_selection()
+			
+			if event.doubleclick:
+				select_sfx.play()
+				handle_selection()
+
+func _on_Options_gui_input(event):
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			select_sfx.play()
+			current_selection = 1
+			update_current_selection()
+			
+			if event.doubleclick:
+				select_sfx.play()
+				handle_selection()
+
+func _on_MMenu_gui_input(event):
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			select_sfx.play()
+			current_selection = 2
+			update_current_selection()
+			
+			if event.doubleclick:
+				select_sfx.play()
+				handle_selection()
+
+func _on_Quit_gui_input(event):
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			select_sfx.play()
+			current_selection = 3
+			update_current_selection()
+			
+			if event.doubleclick:
+				select_sfx.play()
+				handle_selection()
+
 func handle_selection():
 	if current_selection == 0:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

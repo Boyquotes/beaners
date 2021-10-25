@@ -13,9 +13,9 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 4.75683, 1 ),
+"transitions": PoolRealArray( 1, 4.75683, 1.4237e-05 ),
 "update": 0,
-"values": [ Vector3( 1, 1, 1 ), Vector3( 1.5, 1.5, 1.5 ), Vector3( 1, 1, 1 ) ]
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1.5, 1.5, 1.5 ), Vector3( 0, 0, 0 ) ]
 }
 tracks/1/type = "audio"
 tracks/1/path = NodePath("ExplosionSfx")

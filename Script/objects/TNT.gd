@@ -17,3 +17,5 @@ func _on_ExplosionTrigger_body_entered(body):
 
 		explosion_anim.play("TNT-Explode")
 		is_already_exploded = true
+		yield(get_tree().create_timer(10), "timeout")
+		queue_free()

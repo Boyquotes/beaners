@@ -8,4 +8,11 @@ export_presets.cfg
 data_*/
 
 # .import ignores
-!*.import
+*.import
+.import
+Assets/*.import
+Assets/animations/*.import
+Assets/fonts/*.import
+Assets/objects/*.import
+Assets/sfx/*.import
+Assets/worlds/*.import

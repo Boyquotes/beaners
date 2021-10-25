@@ -2,7 +2,7 @@ extends Spatial
 
 onready var debug_overlay_label = $"DebugOverlay/Label"
 
-func _init():
+func _ready():
 	if not OS.is_debug_build():
 		debug_overlay_label.hide()
 

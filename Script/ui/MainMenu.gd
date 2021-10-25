@@ -12,10 +12,6 @@ onready var back_sfx = $"BackSfx"
 
 var current_selection = 0
 
-func _ready():
-	current_selection = 0
-	update_current_selection()
-
 func _process(_delta):
 	if (Input.is_action_just_pressed("ui_up") and current_selection > 0
 	   or Input.is_action_just_pressed("ui_down") and current_selection < 3):

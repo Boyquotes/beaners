@@ -1,4 +1,4 @@
-extends KinematicBody
+	extends KinematicBody
 
 export var speed = 7
 export var acceleration = 5
@@ -7,6 +7,7 @@ export var jump_power = 30
 
 onready var head = $"Head"
 onready var third_person_camera = $"Head/ThirdPersonCamera"
+onready var walk_sfx = $"WalkSfx"
 onready var debug_overlay = $"../DebugOverlay"
 
 var velocity = Vector3()
@@ -21,6 +22,13 @@ func _physics_process(delta):
 	var head_basis = head.get_global_transform().basis
 	var direction = Vector3()
 	
+	if (Input.is_action_pressed("game_up")
+	   or Input.is_action_pressed("game_down")
+	   or Input.is_action_pressed("game_left")
+	   or Input.is_action_pressed("game_right")):
+		if not walk_sfx.is_playing() and is_on_floor():
+			walk_sfx.play()
+	
 	if Input.is_action_pressed("game_up"):
 		direction -= head_basis.z
 	elif Input.is_action_pressed("game_down"):
@@ -32,9 +40,11 @@ func _physics_process(delta):
 		direction += head_basis.x
 	
 	if Input.is_action_just_pressed("game_sprint"):
-		speed += 8
+		speed = 14
+		walk_sfx.set_pitch_scale(1.250)
 	elif Input.is_action_just_released("game_sprint"):
-		speed -= 8
+		walk_sfx.set_pitch_scale(1)
+		speed = 7
 	
 	if Input.is_action_just_pressed("game_jump") and is_on_floor():
 		velocity.y += jump_power
@@ -42,11 +52,13 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("game_crouch") and is_on_floor():
 		set_scale(Vector3(1, 0.5, 1))
 		third_person_camera.set_rotation_degrees(Vector3(-10, 0, 0))
-		speed -= 4
+		walk_sfx.set_pitch_scale(0.8)
+		speed = 3
 	elif Input.is_action_just_released("game_crouch") and is_on_floor():
 		set_scale(Vector3(1, 1, 1))
 		third_person_camera.set_rotation_degrees(Vector3(-30, 0, 0))
-		speed += 4
+		walk_sfx.set_pitch_scale(1)
+		speed = 7
 	
 	if Input.is_action_pressed("game_reset"):
 		set_translation(Vector3(1, 1, 1))

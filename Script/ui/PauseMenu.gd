@@ -37,6 +37,8 @@ func handle_selection():
 	if current_selection == 0:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		get_node("/root/World/Player/Head").set_visible(true)
+		get_node("/root/World/Player/Head/HUDOverlay/Target").set_visible(true)
+		get_node("/root/World/Player/Head/HUDOverlay/Health").set_visible(true)
 		queue_free()
 	elif current_selection == 1:
 		print("Options coming soon!")

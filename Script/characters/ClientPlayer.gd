@@ -8,6 +8,7 @@ export var health = 100
 
 onready var head = $"Head"
 onready var third_person_camera = $"Head/ThirdPersonCamera"
+onready var hud_overlay = $"Head/HUDOverlay"
 onready var walk_sfx = $"WalkSfx"
 onready var walk_anim = $"WalkAnim"
 onready var debug_overlay = $"../DebugOverlay"
@@ -17,7 +18,7 @@ var velocity = Vector3()
 func _ready():
 	debug_overlay.add_statistics("Position", self, "translation", false)
 	debug_overlay.add_statistics("Velocity", self, "velocity", false)
-	
+	hud_overlay.set_health(health)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta):
@@ -76,8 +77,16 @@ func _physics_process(delta):
 	velocity.y -= gravity
 	velocity = move_and_slide(velocity, Vector3.UP, true)
 
-func set_health(hp: float):
-	health = hp
+func increase_health(hp: int):
+	health += hp
+	hud_overlay.set_health(health)
+	
+	if health > 100:
+		decrease_health(hp)
+
+func decrease_health(hp: int):
+	health -= hp
+	hud_overlay.set_health(health)
 	
 	if health < 1:
 		die()
@@ -86,4 +95,6 @@ func die():
 	head.set_visible(false)
 	yield(get_tree().create_timer(5.0), "timeout")
 	set_translation(Vector3(1, 0, 1))
+	health = 100
+	hud_overlay.set_health(100)
 	head.set_visible(true)

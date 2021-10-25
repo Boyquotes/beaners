@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Script/characters/ClientPlayer.gd" type="Script" id=1]
 [ext_resource path="res://Script/characters/Head.gd" type="Script" id=2]
 [ext_resource path="res://Assets/sfx/Player-Walk-Generic.wav" type="AudioStream" id=3]
 [ext_resource path="res://Assets/animations/Player-Walk-Anim.tres" type="Animation" id=4]
+[ext_resource path="res://Scene/ui/HUD.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.75
@@ -23,16 +24,6 @@ script = ExtResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.853071, 0 )
 script = ExtResource( 2 )
 
-[node name="Target" type="Label" parent="Head"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-text = "."
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="FirstPersonCamera" type="Camera" parent="Head"]
 current = true
 
@@ -42,6 +33,8 @@ cast_to = Vector3( 0, 0, -100 )
 
 [node name="ThirdPersonCamera" type="Camera" parent="Head"]
 transform = Transform( 1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 2.14693, 5 )
+
+[node name="HUDOverlay" parent="Head" instance=ExtResource( 5 )]
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )

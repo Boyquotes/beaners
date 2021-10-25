@@ -4,7 +4,8 @@ export var mouse_sensitivity = 0.150
 
 onready var player = get_parent()
 onready var pmenu = load("res://Scene/ui/PauseMenu.tscn")
-onready var target = $"Target"
+onready var hud_overlay_target = $"HUDOverlay/Target"
+onready var hud_overlay_health = $"HUDOverlay/Health"
 onready var first_person_camera = $"FirstPersonCamera"
 onready var third_person_camera = $"ThirdPersonCamera"
 
@@ -14,14 +15,16 @@ func _process(_delta):
 	if Input.is_action_just_pressed("ui_cancel") and is_visible():
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		get_parent().add_child(pmenu.instance())
+		hud_overlay_target.set_visible(false)
+		hud_overlay_health.set_visible(false)
 		set_visible(false)
 	
 	if Input.is_action_just_pressed("ui_perspective"):
 		if first_person_camera.is_current():
-			target.set_visible(false)
+			hud_overlay_target.set_visible(false)
 			third_person_camera.make_current()
 		elif third_person_camera.is_current():
-			target.set_visible(true)
+			hud_overlay_target.set_visible(true)
 			first_person_camera.make_current()
 
 func _input(event):

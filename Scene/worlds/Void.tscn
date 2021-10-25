@@ -61,4 +61,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.126, -1.786, -2.199 )
 [node name="TNT" parent="." instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.122, -1.125, -10.868 )
 
+[node name="TNT2" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.244, -1.125, -21.736 )
+
+[node name="TNT3" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.8206, -1.125, -10.868 )
+
+[node name="TNT4" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.8206, -1.125, -15.6905 )
+
 [node name="DebugOverlay" parent="." instance=ExtResource( 5 )]

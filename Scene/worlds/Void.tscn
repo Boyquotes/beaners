@@ -22,7 +22,7 @@ script = ExtResource( 7 )
 [node name="Player" parent="." groups=[
 "Players",
 ] instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.12481, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.125, 0 )
 
 [node name="OtherPlayer" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.125, -13.3865 )

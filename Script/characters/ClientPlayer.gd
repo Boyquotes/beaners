@@ -8,6 +8,7 @@ export var jump_power = 30
 onready var head = $"Head"
 onready var third_person_camera = $"Head/ThirdPersonCamera"
 onready var walk_sfx = $"WalkSfx"
+onready var walk_anim = $"WalkAnim"
 onready var debug_overlay = $"../DebugOverlay"
 
 var velocity = Vector3()
@@ -26,8 +27,8 @@ func _physics_process(delta):
 	   or Input.is_action_pressed("game_down")
 	   or Input.is_action_pressed("game_left")
 	   or Input.is_action_pressed("game_right")):
-		if not walk_sfx.is_playing() and is_on_floor():
-			walk_sfx.play()
+		if not walk_anim.is_playing() and is_on_floor():
+			walk_anim.play("Player-Walk-Anim")
 	
 	if Input.is_action_pressed("game_up"):
 		direction -= head_basis.z

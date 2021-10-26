@@ -14,7 +14,7 @@ var camera_rotation_x = 0
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_cancel") and is_visible():
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		get_parent().add_child(pmenu.instance())
+		get_tree().root.add_child(pmenu.instance())
 		hud_overlay_target.set_visible(false)
 		hud_overlay_health.set_visible(false)
 		set_visible(false)

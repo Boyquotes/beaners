@@ -1,8 +1,9 @@
 extends MarginContainer
 
 var mainmenu = preload("res://Scene/ui/MainMenu.tscn")
+var options_scene = load("res://Scene/ui/Options.tscn")
 
-onready var world = $"../../"
+onready var world = $"/root/World"
 onready var resume = $"CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3/HBoxContainer/Resume"
 onready var options = $"CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer2/HBoxContainer/Options" 
 onready var mmenu = $"CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer4/HBoxContainer/MMenu"
@@ -12,6 +13,9 @@ onready var select_sfx = $"SelectSfx"
 onready var back_sfx = $"BackSfx"
 
 var current_selection = 0
+
+func _ready():
+	update_current_selection()
 
 func _process(_delta):
 	if (Input.is_action_just_pressed("ui_up") and current_selection > 0
@@ -36,56 +40,72 @@ func _process(_delta):
 func _on_Resume_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
-			select_sfx.play()
-			current_selection = 0
-			update_current_selection()
-			
-			if event.doubleclick:
-				select_sfx.play()
+				navigate_sfx.play()
+				current_selection = 0
+				update_current_selection()
 				handle_selection()
+
+func _on_Resume_mouse_entered():
+	current_selection = -1
+	update_current_selection()
+	select_sfx.play()
 
 func _on_Options_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
-			select_sfx.play()
+			navigate_sfx.play()
 			current_selection = 1
 			update_current_selection()
-			
-			if event.doubleclick:
-				select_sfx.play()
-				handle_selection()
+			handle_selection()
+
+func _on_Options_mouse_entered():
+	current_selection = -1
+	update_current_selection()
+	select_sfx.play()
 
 func _on_MMenu_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
-			select_sfx.play()
+			navigate_sfx.play()
 			current_selection = 2
 			update_current_selection()
-			
-			if event.doubleclick:
-				select_sfx.play()
-				handle_selection()
+			handle_selection()
+
+func _on_MMenu_mouse_entered():
+	current_selection = -1
+	update_current_selection()
+	select_sfx.play()
 
 func _on_Quit_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
-			select_sfx.play()
+			navigate_sfx.play()
 			current_selection = 3
 			update_current_selection()
-			
-			if event.doubleclick:
-				select_sfx.play()
-				handle_selection()
+			handle_selection()
+
+func _on_Quit_mouse_entered():
+	current_selection = -1
+	update_current_selection()
+	select_sfx.play()
 
 func handle_selection():
 	if current_selection == 0:
+		var head = get_node("/root/World/Player/Head")
+		var first_person_camera = get_node("/root/World/Player/Head/FirstPersonCamera")
+		var hud_overlay_target = get_node("/root/World/Player/Head/HUDOverlay/Target")
+		var hud_overlay_health = get_node("/root/World/Player/Head/HUDOverlay/Health")
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		get_node("/root/World/Player/Head").set_visible(true)
-		get_node("/root/World/Player/Head/HUDOverlay/Target").set_visible(true)
-		get_node("/root/World/Player/Head/HUDOverlay/Health").set_visible(true)
+		head.set_visible(true)
+		hud_overlay_health.set_visible(true)
+		
+		if first_person_camera.is_current():
+			hud_overlay_target.set_visible(true)
+		
 		queue_free()
 	elif current_selection == 1:
-		print("Options coming soon!")
+		get_tree().root.add_child(options_scene.instance())
+		set_process(false)
 	elif current_selection == 2:
 		var _scene = get_tree().change_scene_to(mainmenu)
 		world.queue_free()

@@ -10,17 +10,17 @@
 size = 69
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxEmpty" id=11]
+[sub_resource type="StyleBoxEmpty" id=2]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 32
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxEmpty" id=8]
+[sub_resource type="StyleBoxEmpty" id=4]
 
-[sub_resource type="StyleBoxEmpty" id=9]
+[sub_resource type="StyleBoxEmpty" id=5]
 
-[sub_resource type="StyleBoxEmpty" id=10]
+[sub_resource type="StyleBoxEmpty" id=6]
 
 [node name="MainMenu" type="MarginContainer"]
 anchor_right = 1.0
@@ -84,8 +84,8 @@ margin_bottom = 38.0
 [node name="Play" type="Button" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3/HBoxContainer"]
 margin_right = 84.0
 margin_bottom = 38.0
-custom_styles/focus = SubResource( 11 )
-custom_fonts/font = SubResource( 2 )
+custom_styles/focus = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "PLAY"
 flat = true
 
@@ -101,8 +101,8 @@ margin_bottom = 38.0
 [node name="Options" type="Button" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer2/HBoxContainer"]
 margin_right = 140.0
 margin_bottom = 38.0
-custom_styles/focus = SubResource( 8 )
-custom_fonts/font = SubResource( 2 )
+custom_styles/focus = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 text = "OPTIONS"
 flat = true
 
@@ -119,8 +119,8 @@ margin_bottom = 38.0
 [node name="Help" type="Button" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer4/HBoxContainer"]
 margin_right = 86.0
 margin_bottom = 38.0
-custom_styles/focus = SubResource( 9 )
-custom_fonts/font = SubResource( 2 )
+custom_styles/focus = SubResource( 5 )
+custom_fonts/font = SubResource( 3 )
 text = "HELP"
 flat = true
 
@@ -137,8 +137,8 @@ margin_bottom = 38.0
 [node name="Quit" type="Button" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer/HBoxContainer"]
 margin_right = 82.0
 margin_bottom = 38.0
-custom_styles/focus = SubResource( 10 )
-custom_fonts/font = SubResource( 2 )
+custom_styles/focus = SubResource( 6 )
+custom_fonts/font = SubResource( 3 )
 text = "QUIT"
 flat = true
 
@@ -152,6 +152,10 @@ stream = ExtResource( 3 )
 stream = ExtResource( 5 )
 
 [connection signal="gui_input" from="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3/HBoxContainer/Play" to="." method="_on_Play_gui_input"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3/HBoxContainer/Play" to="." method="_on_Play_mouse_entered"]
 [connection signal="gui_input" from="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer2/HBoxContainer/Options" to="." method="_on_Options_gui_input"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer2/HBoxContainer/Options" to="." method="_on_Options_mouse_entered"]
 [connection signal="gui_input" from="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer4/HBoxContainer/Help" to="." method="_on_Help_gui_input"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer4/HBoxContainer/Help" to="." method="_on_Help_mouse_entered"]
 [connection signal="gui_input" from="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer/HBoxContainer/Quit" to="." method="_on_Quit_gui_input"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer/HBoxContainer/Quit" to="." method="_on_Quit_mouse_entered"]

@@ -29,7 +29,8 @@ func _physics_process(delta):
 		return
 	
 	if get_translation().y < -50:
-		set_translation(Vector3(1, 0, 1))
+		hud_overlay.set_health(0)
+		die()
 	
 	if (Input.is_action_pressed("game_up")
 	   or Input.is_action_pressed("game_down")
@@ -94,6 +95,8 @@ func decrease_health(hp: int):
 func die():
 	head.set_visible(false)
 	set_visible(false)
+	speed = 10
+	walk_anim.set_speed_scale(1)
 	yield(get_tree().create_timer(5.0), "timeout")
 	health = 100
 	set_translation(Vector3(1, 0, 1))

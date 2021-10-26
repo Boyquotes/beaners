@@ -1,7 +1,7 @@
 extends MarginContainer
 
 var world = preload("res:///Scene/worlds/Void.tscn")
-var options_scene = load("res:///Scene/ui/Options.tscn")
+var options_scene = preload("res:///Scene/ui/Options.tscn")
 
 onready var play = $"CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3/HBoxContainer/Play"
 onready var options = $"CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer2/HBoxContainer/Options"
@@ -107,7 +107,6 @@ func handle_selection():
 		var _scene = get_tree().change_scene_to(world)
 	elif current_selection == 1:
 		get_tree().root.add_child(options_scene.instance())
-		set_process(false)
 	elif current_selection == 2:
 		print("Help coming soon!")
 	elif current_selection == 3:

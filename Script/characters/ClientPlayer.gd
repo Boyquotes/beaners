@@ -50,7 +50,7 @@ func _physics_process(delta):
 	elif Input.is_action_pressed("game_right"):
 		direction += head_basis.x
 	
-	if Input.is_action_just_pressed("game_sprint"):
+	if Input.is_action_pressed("game_sprint"):
 		speed = 15
 		walk_anim.set_speed_scale(1.250)
 	elif Input.is_action_just_released("game_sprint"):
@@ -110,7 +110,7 @@ func die():
 	set_visible(true)
 
 func is_dead()-> bool:
-	if health < 1:
+	if health == 0 or health < 1:
 		return true
 	
 	return false

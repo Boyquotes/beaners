@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scene/characters/ClientPlayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/worlds/Tiles107.png" type="Texture" id=2]
 [ext_resource path="res://Scene/objects/Box.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scene/objects/Tutorial.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scene/ui/DebugOverlay.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scene/characters/NetworkPlayer.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Script/worlds/Void.gd" type="Script" id=7]
 [ext_resource path="res://Scene/objects/TNT.tscn" type="PackedScene" id=8]
 
@@ -24,9 +23,6 @@ script = ExtResource( 7 )
 ] instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.125, 0 )
 
-[node name="OtherPlayer" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.125, -13.3865 )
-
 [node name="Floor" type="StaticBody" parent="."]
 transform = Transform( 65.9836, 0, 0, 0, -0.0551849, 0, 0, 0, 60.3921, 0, -2.55853, 0 )
 
@@ -38,12 +34,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00488056, 1.01581, 0.0028054
 mesh = SubResource( 2 )
 material/0 = SubResource( 3 )
 
+[node name="Tutorial" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.5, -4.37114e-08, -4.37114e-08, -4.37114e-08, -0.5, 0, -4.37114e-08, 3.82137e-15, -0.5, 0, -0.985, -5.269 )
+
 [node name="Lighting" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, -0.88094, 0.473227, 0, -0.473227, -0.88094, 0, 0, 0 )
 directional_shadow_mode = 1
-
-[node name="Tutorial" parent="." instance=ExtResource( 4 )]
-transform = Transform( 0.5, -4.37114e-08, -4.37114e-08, -4.37114e-08, -0.5, 0, -4.37114e-08, 3.82137e-15, -0.5, 0, -0.985, -5.269 )
 
 [node name="Box" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.58242, -1.78553, 1.63262 )

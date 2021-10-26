@@ -3,9 +3,6 @@ extends Spatial
 const fire_rate = 0.4
 const clip_size = 13
 const reload_rate = 1
-const default_fov = 70
-const ads_acceleration = 0.3
-const ads_fov = 55
 const default_position = Vector3()
 const ads_position = Vector3()
 
@@ -14,7 +11,7 @@ onready var walk_anim = $"../../../WalkAnim"
 onready var animator = $"Animator"
 onready var hud_overlay_ammo = $"../../HUDOverlay/Ammo"
 onready var raycast = $"../RayCast"
-onready var camera = $".."
+onready var first_person_camera = $".."
 
 var current_ammo = 0
 var can_fire = true
@@ -30,19 +27,23 @@ func _process(_delta):
 			fire()
 		elif not is_reloading:
 			reload()
-	if Input.is_action_just_released("game_weapon_reload") and current_ammo < clip_size and not player.is_dead() and not is_reloading:
-		reload()
+	if Input.is_action_just_released("game_weapon_reload") and not player.is_dead():
+		if current_ammo < clip_size and not is_reloading:
+			reload()
 	if Input.is_action_pressed("game_secondary_fire"):
-		camera.set_fov(lerp(camera.fov, ads_fov, ads_acceleration))
+		first_person_camera.set_fov(lerp(first_person_camera.fov, 50, 0.3))
 	else:
-		camera.set_fov(lerp(camera.fov, default_fov, ads_acceleration))
+		first_person_camera.set_fov(lerp(first_person_camera.fov, 70, 0.3))
 
 func validate_collision():
 	if raycast.is_colliding():
 		var collider = raycast.get_collider()
 		
 		if collider.is_in_group("Players"):
-			collider.decrease_health(2)
+			var decreased_health = collider.get_translation().z - get_translation().z
+			
+			if decreased_health > 0:
+				collider.decrease_health(decreased_health)
 		elif collider.is_in_group("TNTs"):
 			collider.explode()
 

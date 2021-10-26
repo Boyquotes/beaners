@@ -13,6 +13,7 @@ var current_selection = 0
 
 func _ready():
 	var config_status = config.load("user://settings.cfg")
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	update_current_selection()
 	
 	if config_status == OK:
@@ -22,9 +23,14 @@ func _ready():
 	elif config_status == FAILED:
 		OS.alert("Failed to load configuration.", "Error")
 
+func _input(event):
+	if event is InputEventMouseMotion:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
 func _process(_delta):
 	if (Input.is_action_just_pressed("ui_up") and current_selection > 0
 	   or Input.is_action_just_pressed("ui_down") and current_selection < 3):
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		navigate_sfx.play()
 	
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -39,6 +45,7 @@ func _process(_delta):
 		current_selection += 1
 		update_current_selection()
 	elif Input.is_action_just_pressed("ui_accept"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		select_sfx.play()
 		handle_selection()
 
@@ -93,6 +100,7 @@ func _on_Back_gui_input(event):
 			navigate_sfx.play()
 			current_selection = 3
 			update_current_selection()
+			handle_selection()
 
 func _on_Back_mouse_entered():
 	current_selection = -1

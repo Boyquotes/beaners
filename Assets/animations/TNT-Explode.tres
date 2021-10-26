@@ -5,29 +5,29 @@
 [resource]
 resource_name = "TNT-Explode"
 length = 4.6
-tracks/0/type = "value"
-tracks/0/path = NodePath("MeshInstance:scale")
+tracks/0/type = "audio"
+tracks/0/path = NodePath("ExplosionSfx")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 4.75683, 1.4237e-05 ),
-"update": 0,
-"values": [ Vector3( 1, 1, 1 ), Vector3( 1.5, 1.5, 1.5 ), Vector3( 0, 0, 0 ) ]
-}
-tracks/1/type = "audio"
-tracks/1/path = NodePath("ExplosionSfx")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "clips": [ {
 "end_offset": 1.21,
 "start_offset": 0.0,
 "stream": ExtResource( 1 )
 } ],
 "times": PoolRealArray( 0 )
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MeshInstance:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 3, 3, 3 ), Vector3( 0, 0, 0 ) ]
 }

@@ -15,11 +15,17 @@ onready var back_sfx = $"BackSfx"
 var current_selection = 0
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	update_current_selection()
+
+func _input(event):
+	if event is InputEventMouseMotion:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _process(_delta):
 	if (Input.is_action_just_pressed("ui_up") and current_selection > 0
 	   or Input.is_action_just_pressed("ui_down") and current_selection < 3):
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		navigate_sfx.play()
 	
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -34,6 +40,7 @@ func _process(_delta):
 		current_selection += 1
 		update_current_selection()
 	elif Input.is_action_just_pressed("ui_accept"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		select_sfx.play()
 		handle_selection()
 
@@ -93,11 +100,15 @@ func handle_selection():
 	if current_selection == 0:
 		var head = get_node("/root/World/Player/Head")
 		var first_person_camera = get_node("/root/World/Player/Head/FirstPersonCamera")
+		var pistol = get_node("/root/World/Player/Head/FirstPersonCamera/Pistol")
 		var hud_overlay_target = get_node("/root/World/Player/Head/HUDOverlay/Target")
 		var hud_overlay_health = get_node("/root/World/Player/Head/HUDOverlay/Health")
+		var hud_overlay_ammo = get_node("/root/World/Player/Head/HUDOverlay/Ammo")
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		head.set_visible(true)
 		hud_overlay_health.set_visible(true)
+		hud_overlay_ammo.set_visible(true)
+		pistol.set_process(true)
 		
 		if first_person_camera.is_current():
 			hud_overlay_target.set_visible(true)

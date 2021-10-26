@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Script/characters/ClientPlayer.gd" type="Script" id=1]
 [ext_resource path="res://Script/characters/Head.gd" type="Script" id=2]
 [ext_resource path="res://Assets/sfx/Player-Walk-Generic.wav" type="AudioStream" id=3]
 [ext_resource path="res://Assets/animations/Player-Walk-Anim.tres" type="Animation" id=4]
 [ext_resource path="res://Scene/ui/HUD.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scene/objects/pistol.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.75
@@ -30,6 +31,9 @@ current = true
 [node name="RayCast" type="RayCast" parent="Head/FirstPersonCamera"]
 enabled = true
 cast_to = Vector3( 0, 0, -100 )
+
+[node name="Pistol" parent="Head/FirstPersonCamera" instance=ExtResource( 6 )]
+transform = Transform( -0.3, 0, -4.52987e-08, 0, 0.3, 0, 4.52987e-08, 0, -0.3, 0.5, -0.353071, -1.44 )
 
 [node name="ThirdPersonCamera" type="Camera" parent="Head"]
 transform = Transform( 1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 2.14693, 5 )

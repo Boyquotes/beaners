@@ -2,12 +2,14 @@ extends Spatial
 
 export var mouse_sensitivity = 0.150
 
-onready var player = get_parent()
+onready var player = $".."
 onready var pmenu = load("res://Scene/ui/PauseMenu.tscn")
 onready var hud_overlay_target = $"HUDOverlay/Target"
 onready var hud_overlay_health = $"HUDOverlay/Health"
+onready var hud_overlay_ammo = $"HUDOverlay/Ammo"
 onready var first_person_camera = $"FirstPersonCamera"
 onready var third_person_camera = $"ThirdPersonCamera"
+onready var pistol = $"FirstPersonCamera/Pistol"
 
 var camera_rotation_x = 0
 
@@ -17,6 +19,8 @@ func _process(_delta):
 		get_tree().root.add_child(pmenu.instance())
 		hud_overlay_target.set_visible(false)
 		hud_overlay_health.set_visible(false)
+		hud_overlay_ammo.set_visible(false)
+		pistol.set_process(false)
 		set_visible(false)
 	
 	if Input.is_action_just_pressed("ui_perspective"):

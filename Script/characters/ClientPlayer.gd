@@ -1,12 +1,13 @@
-	extends KinematicBody
+extends KinematicBody
 
 export var speed = 10
 export var acceleration = 5
-export var gravity = 0.98
+export var gravity = 1.30
 export var jump_power = 30
 export var health = 100
 
 onready var head = $"Head"
+onready var pistol = $"Head/FirstPersonCamera/Pistol"
 onready var third_person_camera = $"Head/ThirdPersonCamera"
 onready var hud_overlay = $"Head/HUDOverlay"
 onready var walk_sfx = $"WalkSfx"
@@ -62,7 +63,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("game_crouch") and is_on_floor():
 		set_scale(Vector3(1, 0.5, 1))
 		third_person_camera.set_rotation_degrees(Vector3(-10, 0, 0))
-		walk_anim.set_speed_scale(0.8)
+		walk_anim.set_speed_scale(0.850)
 		speed = 6
 	elif Input.is_action_just_released("game_crouch") and is_on_floor():
 		set_scale(Vector3(1, 1, 1))
@@ -71,7 +72,8 @@ func _physics_process(delta):
 		speed = 10
 	
 	if Input.is_action_pressed("game_reset"):
-		set_translation(Vector3(1, 0, 1))
+		if not pistol.is_visible():
+			set_translation(Vector3(1, 0, 1))
 	
 	direction = direction.normalized()
 	velocity = velocity.linear_interpolate(direction * speed, acceleration * delta)
@@ -92,6 +94,9 @@ func decrease_health(hp: int):
 	if health < 1:
 		die()
 
+func set_speed(spd: int):
+	speed = spd
+
 func die():
 	head.set_visible(false)
 	set_visible(false)
@@ -103,3 +108,9 @@ func die():
 	hud_overlay.set_health(100)
 	head.set_visible(true)
 	set_visible(true)
+
+func is_dead()-> bool:
+	if health < 1:
+		return true
+	
+	return false

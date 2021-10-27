@@ -9,7 +9,7 @@ const ads_position = Vector3()
 onready var player = $"../../../"
 onready var walk_anim = $"../../../WalkAnim"
 onready var animator = $"Animator"
-onready var hud_overlay_ammo = $"../../HUDOverlay/Ammo"
+onready var hud_overlay = $"../../HUDOverlay"
 onready var raycast = $"../RayCast"
 onready var first_person_camera = $".."
 
@@ -19,9 +19,9 @@ var is_reloading = false
 
 func _process(_delta):
 	if is_reloading:
-		hud_overlay_ammo.set_text("Reloading..")
+		hud_overlay.set_ammo("Reloading..")
 	else:
-		hud_overlay_ammo.set_text("Ammo: %d/%d" % [current_ammo, clip_size])
+		hud_overlay.set_ammo("Ammo: %d/%d" % [current_ammo, clip_size])
 	if Input.is_action_pressed("game_primary_fire") and not player.is_dead() and can_fire:
 		if current_ammo > 0 and not is_reloading:
 			fire()
@@ -30,10 +30,6 @@ func _process(_delta):
 	if Input.is_action_just_released("game_weapon_reload") and not player.is_dead():
 		if current_ammo < clip_size and not is_reloading:
 			reload()
-	if Input.is_action_pressed("game_secondary_fire"):
-		first_person_camera.set_fov(lerp(first_person_camera.fov, 50, 0.3))
-	else:
-		first_person_camera.set_fov(lerp(first_person_camera.fov, 70, 0.3))
 
 func validate_collision():
 	if raycast.is_colliding():
@@ -55,7 +51,6 @@ func fire():
 	current_ammo -= 1
 	validate_collision()
 	animator.play("Weapon-Fire-Anim")
-	
 	yield(get_tree().create_timer(fire_rate), "timeout")
 	can_fire = true
 

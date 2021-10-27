@@ -98,6 +98,7 @@ func _on_Quit_mouse_entered():
 
 func handle_selection():
 	if current_selection == 0:
+		var player = get_node("/root/World/Player")
 		var head = get_node("/root/World/Player/Head")
 		var first_person_camera = get_node("/root/World/Player/Head/FirstPersonCamera")
 		var pistol = get_node("/root/World/Player/Head/FirstPersonCamera/Pistol")
@@ -108,10 +109,13 @@ func handle_selection():
 		head.set_visible(true)
 		hud_overlay_health.set_visible(true)
 		hud_overlay_ammo.set_visible(true)
-		pistol.set_process(true)
 		
 		if first_person_camera.is_current():
 			hud_overlay_target.set_visible(true)
+		if player.get_weapon() < 1:
+			hud_overlay_ammo.set_visible(false)
+		if player.get_weapon() == 1:
+			pistol.set_process(true)
 		
 		queue_free()
 	elif current_selection == 1:

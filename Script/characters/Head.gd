@@ -20,8 +20,10 @@ func _process(_delta):
 		hud_overlay_target.set_visible(false)
 		hud_overlay_health.set_visible(false)
 		hud_overlay_ammo.set_visible(false)
-		pistol.set_process(false)
 		set_visible(false)
+		
+		if player.get_weapon() == 1:
+			pistol.set_process(false)
 	
 	if Input.is_action_just_pressed("ui_perspective"):
 		if first_person_camera.is_current():
@@ -30,6 +32,11 @@ func _process(_delta):
 		elif third_person_camera.is_current():
 			hud_overlay_target.set_visible(true)
 			first_person_camera.make_current()
+	
+	if Input.is_action_pressed("game_secondary_fire"):
+		first_person_camera.set_fov(lerp(first_person_camera.fov, 50, 0.3))
+	else:
+		first_person_camera.set_fov(lerp(first_person_camera.fov, 70, 0.3))
 
 func _input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:

@@ -17,7 +17,7 @@ usage = 3
 anchor_right = 1.0
 anchor_bottom = 1.0
 text = "Welcome to Beaners!
-version 1.0
+version 1.1
 
 NOTE: This game is still in beta, some content might change every release.
 
@@ -34,9 +34,15 @@ Controls:
 \"Ctrl\" - Crouch
 \"Left Shift\" - Sprint
 
+[Mouse]
+\"Mouse\" - Look
+\"Left Mouse\" - Fires current weapon
+\"Right Mouse\" - Switch to ADS mode / Switch back to Normal mode
+\"Wheel up\" / \"Wheel down\" - Switch weapons
+
 [Misc]
-\"Esc\" - Pause/resume game
-\"R\" - Reset player to it's default position
+\"Esc\" - Pause / resume game
+\"R\" - Reset player to it's default position (if no weapon is equipped)
 \"TAB\" - Change player perspective"
 align = 1
 valign = 1

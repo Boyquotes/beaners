@@ -7,12 +7,6 @@ export_presets.cfg
 .mono/
 data_*/
 
-# .import ignores
+# Engine import ignores
 *.import
-.import
-Assets/*.import
-Assets/animations/*.import
-Assets/fonts/*.import
-Assets/objects/*.import
-Assets/sfx/*.import
-Assets/worlds/*.import
+game/.import

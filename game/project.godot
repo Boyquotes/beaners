@@ -13,9 +13,14 @@ config_version=4
 config/name="Beaners"
 config/description="A multiplayer game where you play as a bean with your friends."
 run/main_scene="res://Scenes/MainScene.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="beaners"
 boot_splash/image="res://Assets/splash.png"
-boot_splash/use_filter=false
 config/icon="res://icon.png"
+
+[autoload]
+
+WindowConfigWatcher="*res://Scripts/autoload/WindowConfigWatcher.gd"
 
 [input]
 

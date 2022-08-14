@@ -104,7 +104,7 @@ func reset_opt_selection():
 	update_opt_selection()
 
 func _on_PlayerName_text_changed(new_text):
-	ConfigWatcher.get_player_config().set_player_name("name", new_text)
+	ConfigWatcher.get_player_config().set_player_name(new_text)
 	ConfigWatcher.save()
 
 func _on_JoinOption_mouse_entered():

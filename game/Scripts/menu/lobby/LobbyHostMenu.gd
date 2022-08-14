@@ -4,7 +4,6 @@ var default_font_color = Color(1, 1, 1, 1)
 var hover_font_color = Color("#D3D3D3")
 
 var is_typing = false
-var config = ConfigFile.new()
 
 onready var ServerAddress = $"Root/Contents/ServerAddress"
 onready var ServerPort = $"Root/Contents/ServerPort"
@@ -20,22 +19,17 @@ onready var UiSelectPlayer = $"UiSelectPlayer"
 export var option_selection = -1
 
 func _ready():
-	# Initialize saved configuration
-	config.load("user://game.cfg")
-	
 	# Initialize MapSelection's items
 	MapSelection.add_item("Heaven", 0)
 	MapSelection.add_item("Grassy Holmes", 1)
-	MapSelection.add_item("SUSland", 2)
+	MapSelection.add_item("Waterland", 2)
 	MapSelection.add_item("Tutorial", 3)
 	
-	# Set map selection, server address and port from saved configuration
-	MapSelection.select(config.get_value("Lobby", "host-map-selection", 3))
-	ServerAddress.set_text(config.get_value("Lobby", "host-server-address", ""))
-	ServerPort.set_text(config.get_value("Lobby", "host-server-port", ""))
-	
-	# Also for player limits
-	PlayerLimit.set_value(config.get_value("Lobby", "host-player-limit", 10))
+	# Set map selection, player limit, server address and port from saved configuration
+	MapSelection.select(ConfigWatcher.get_lobby_config().get_host_map_selection())
+	ServerAddress.set_text(ConfigWatcher.get_lobby_config().get_host_server_address())
+	ServerPort.set_text(ConfigWatcher.get_lobby_config().get_host_server_port())
+	PlayerLimit.set_value(ConfigWatcher.get_lobby_config().get_host_player_limit())
 
 func _input(event):
 	if event is InputEventMouseButton or event is InputEventScreenTouch:
@@ -112,24 +106,24 @@ func reset_opt_selection():
 	update_opt_selection()
 
 func _on_ServerAddress_text_changed(new_text):
-	config.set_value("Lobby", "host-server-address", new_text)
-	config.save("user://game.cfg")
+	ConfigWatcher.get_lobby_config().set_host_server_address(new_text)
+	ConfigWatcher.save()
 
 func _on_ServerPort_text_changed(new_text):
 	if not new_text.is_valid_integer():
 		ServerPort.delete_char_at_cursor()
 	
-	config.set_value("Lobby", "host-server-port", new_text)
-	config.save("user://game.cfg")
+	ConfigWatcher.get_lobby_config().set_host_server_port(new_text)
+	ConfigWatcher.save()
 
 func _on_PlayerLimit_value_changed(value):
 	PlayerLimitCount.set_text(String(value))
-	config.set_value("Lobby", "host-player-limit", value)
-	config.save("user://game.cfg")
+	ConfigWatcher.get_lobby_config().set_host_player_limit(value)
+	ConfigWatcher.save()
 
 func _on_MapSelection_item_selected(index):
-	config.set_value("Lobby", "host-map-selection", index)
-	config.save("user://game.cfg")
+	ConfigWatcher.get_lobby_config().set_host_map_selection(index)
+	ConfigWatcher.save()
 
 func _on_ServerAddress_focus_entered():
 	is_typing = true

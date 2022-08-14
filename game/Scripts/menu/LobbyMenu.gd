@@ -4,7 +4,6 @@ var default_font_color = Color(1, 1, 1, 1)
 var hover_font_color = Color("#D3D3D3")
 
 var is_typing = false
-var config = ConfigFile.new()
 
 onready var JoinOption = $"Root/MarginContents/Contents/JoinOption"
 onready var HostOption = $"Root/MarginContents/Contents/HostOption"
@@ -17,11 +16,8 @@ onready var UiSelectPlayer = $"UiSelectPlayer"
 export var option_selection = -1
 
 func _ready():
-	# Initialize saved configuration
-	config.load("user://game.cfg")
-	
 	# Set player name from saved configuration
-	PlayerName.set_text(config.get_value("Player", "name", ""))
+	PlayerName.set_text(ConfigWatcher.get_player_config().get_player_name())
 
 func _input(event):
 	if event is InputEventMouseButton or event is InputEventScreenTouch:
@@ -108,8 +104,8 @@ func reset_opt_selection():
 	update_opt_selection()
 
 func _on_PlayerName_text_changed(new_text):
-	config.set_value("Player", "name", new_text)
-	config.save("user://game.cfg")
+	ConfigWatcher.get_player_config().set_player_name("name", new_text)
+	ConfigWatcher.save()
 
 func _on_JoinOption_mouse_entered():
 	if option_selection == 0: return

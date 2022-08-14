@@ -4,7 +4,6 @@ var default_font_color = Color(1, 1, 1, 1)
 var hover_font_color = Color("#D3D3D3")
 
 var is_typing = false
-var config = ConfigFile.new()
 
 onready var ServerAddress = $"Root/Contents/ServerAddress"
 onready var ServerPort = $"Root/Contents/ServerPort"
@@ -17,12 +16,9 @@ onready var UiSelectPlayer = $"UiSelectPlayer"
 export var option_selection = -1
 
 func _ready():
-	# Initialize saved configuration
-	config.load("user://game.cfg")
-	
 	# Set server address and port from saved configuration
-	ServerAddress.set_text(config.get_value("Lobby", "remote-server-address", ""))
-	ServerPort.set_text(config.get_value("Lobby", "remote-server-port", ""))
+	ServerAddress.set_text(ConfigWatcher.get_lobby_config().get_remote_server_address())
+	ServerPort.set_text(ConfigWatcher.get_lobby_config().get_remote_server_port())
 
 func _input(event):
 	if event is InputEventMouseButton or event is InputEventScreenTouch:
@@ -98,15 +94,15 @@ func reset_opt_selection():
 	update_opt_selection()
 
 func _on_ServerAddress_text_changed(new_text):
-	config.set_value("Lobby", "remote-server-address", new_text)
-	config.save("user://game.cfg")
+	ConfigWatcher.get_lobby_config().set_remote_server_address(new_text)
+	ConfigWatcher.save()
 
 func _on_ServerPort_text_changed(new_text):
 	if not new_text.is_valid_integer():
 		ServerPort.delete_char_at_cursor()
 	
-	config.set_value("Lobby", "remote-server-port", new_text)
-	config.save("user://game.cfg")
+	ConfigWatcher.get_lobby_config().set_remote_server_port(new_text)
+	ConfigWatcher.save()
 
 func _on_ServerAddress_focus_entered():
 	is_typing = true

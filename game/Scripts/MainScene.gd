@@ -28,9 +28,11 @@ func init_audio_config():
 func init_graphics_config():
 	# Initialize display based on saved configuration
 	var config = ConfigWatcher.get_graphics_config()
+	var size = Vector2(config.get_width(), config.get_height())
+	OS.set_window_fullscreen(config.is_fullscreen())
+	OS.set_window_maximized(config.is_maximized())
 	
-	if config.is_fullscreen():
-		# NOTE: Changing resolution in fullscreen is not possible yet in Godot
-		OS.set_window_fullscreen(true)
+	if not config.is_fullscreen():
+		OS.set_window_size(size)
 	else:
-		OS.set_window_size(Vector2(config.get_width(), config.get_height()))
+		get_viewport().set_size(size)

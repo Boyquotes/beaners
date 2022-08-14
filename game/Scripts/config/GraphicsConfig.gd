@@ -4,6 +4,7 @@ var cfg = ConfigFile.new()
 
 const FULLSCREEN = "fullscreen"
 const HEIGHT = "height"
+const MAXIMIZE = "maximize"
 const RENDERER = "renderer"
 const SHADOWS = "shadows"
 const WIDTH = "width"
@@ -23,8 +24,8 @@ func set_cfg(new_cfg: ConfigFile):
 func get_cfg() -> ConfigFile:
 	return cfg
 
-func set_fullscreen(mode: bool):
-	set_value(FULLSCREEN, mode)
+func set_fullscreen(toggle: bool):
+	set_value(FULLSCREEN, toggle)
 
 func is_fullscreen(default = false) -> bool:
 	return get_value(FULLSCREEN, default)
@@ -34,6 +35,12 @@ func set_height(value: float):
 
 func get_height(default = 600.0) -> float:
 	return get_value(HEIGHT, default)
+
+func set_maximize(toggle: bool):
+	set_value(MAXIMIZE, toggle)
+
+func is_maximized(default = false) -> bool:
+	return get_value(MAXIMIZE, default)
 
 func set_renderer(api = null):
 	set_value(RENDERER, api)

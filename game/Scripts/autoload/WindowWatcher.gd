@@ -13,6 +13,8 @@ func _size_changed():
 	# and will save the modified window size
 	var config = ConfigWatcher.get_graphics_config()
 	var root = get_tree().get_root()
+	config.set_fullscreen(OS.is_window_fullscreen())
+	config.set_maximize(OS.is_window_maximized())
 	config.set_width(root.get_size().x)
 	config.set_height(root.get_size().y)
 	ConfigWatcher.save()

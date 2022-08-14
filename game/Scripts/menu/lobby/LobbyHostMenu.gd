@@ -12,8 +12,6 @@ onready var PlayerLimitCount = $"Root/Contents/PlayerLimitContent/PlayerLimitCou
 onready var MapSelection = $"Root/Contents/MapSelectionContent/MapSelection"
 onready var StartOption = $"Root/Contents/OptionsContent/StartOption"
 onready var BackOption = $"Root/Contents/OptionsContent/BackOption"
-onready var UiNavigatePlayer = $"UiNavigatePlayer"
-onready var UiSelectPlayer = $"UiSelectPlayer"
 
 export var option_selection = -1
 
@@ -69,10 +67,7 @@ func _process(_delta):
 
 func handle_opt_selection():
 	# Handle selected option, this is used when pressing the accept input action
-	if UiNavigatePlayer.is_playing():
-		UiNavigatePlayer.stop()
-	
-	UiSelectPlayer.play()
+	UiSoundGlobals.Select.play()
 	
 	if option_selection == -1:
 		option_selection = 0
@@ -89,7 +84,7 @@ func update_opt_selection():
 	StartOption.add_color_override("font_color", default_font_color)
 	BackOption.add_color_override("font_color", default_font_color)
 	
-	if option_selection != -1: UiNavigatePlayer.play()
+	if option_selection != -1: UiSoundGlobals.Navigate.play()
 	
 	# Then do something to the options depending on the selection
 	if option_selection == 0:

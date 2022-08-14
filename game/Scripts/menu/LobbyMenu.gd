@@ -9,9 +9,6 @@ onready var JoinOption = $"Root/MarginContents/Contents/JoinOption"
 onready var HostOption = $"Root/MarginContents/Contents/HostOption"
 onready var BackOption = $"Root/MarginContents/Contents/BackOption"
 onready var PlayerName = $"Root/MarginContents/Contents/PlayerName"
-onready var UiInaccessiblePlayer = $"UiInaccessiblePlayer"
-onready var UiNavigatePlayer = $"UiNavigatePlayer"
-onready var UiSelectPlayer = $"UiSelectPlayer"
 
 export var option_selection = -1
 
@@ -56,21 +53,7 @@ func _process(_delta):
 
 func handle_opt_selection():
 	# Handle selected option, this is used when pressing the accept input action
-	if UiNavigatePlayer.is_playing():
-		UiNavigatePlayer.stop()
-	
-	if option_selection != 2:
-		if PlayerName.get_text().length() < 1:
-			# Put your name first before proceeding to join/create lobbies
-			if UiInaccessiblePlayer.is_playing():
-				UiInaccessiblePlayer.stop()
-			
-			UiInaccessiblePlayer.play()
-			return
-		
-		UiSelectPlayer.play()
-	else:
-		UiInaccessiblePlayer.play()
+	UiSoundGlobals.Select.play()
 	
 	if option_selection == -1:
 		option_selection = 0
@@ -91,7 +74,7 @@ func update_opt_selection():
 	HostOption.add_color_override("font_color", default_font_color)
 	BackOption.add_color_override("font_color", default_font_color)
 	
-	if option_selection != -1: UiNavigatePlayer.play()
+	if option_selection != -1: UiSoundGlobals.Navigate.play()
 	
 	# Then do something to the options depending on the selection
 	if option_selection == 0:

@@ -1,8 +1,6 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/menu/MainMenu.gd" type="Script" id=1]
-[ext_resource path="res://Assets/sfx/ui-navigate.wav" type="AudioStream" id=2]
-[ext_resource path="res://Assets/sfx/ui-select.wav" type="AudioStream" id=3]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://Assets/fonts/Extrude.ttf"
@@ -95,16 +93,6 @@ margin_bottom = 41.0
 mouse_filter = 0
 custom_fonts/font = SubResource( 4 )
 text = "Quit"
-
-[node name="UiNavigatePlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 2 )
-volume_db = -15.0
-bus = "In-Game"
-
-[node name="UiSelectPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
-volume_db = -15.0
-bus = "In-Game"
 
 [connection signal="gui_input" from="Root/MarginContents/Contents/PlayOption" to="." method="_on_PlayOption_gui_input"]
 [connection signal="mouse_entered" from="Root/MarginContents/Contents/PlayOption" to="." method="_on_PlayOption_mouse_entered"]

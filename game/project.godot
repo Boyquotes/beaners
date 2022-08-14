@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 
 WindowWatcher="*res://Scripts/autoload/WindowWatcher.gd"
 ConfigWatcher="*res://Scripts/autoload/ConfigWatcher.gd"
+UiSoundGlobals="*res://Scripts/autoload/UiSoundGlobals.gd"
 
 [input]
 

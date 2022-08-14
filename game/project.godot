@@ -20,7 +20,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-WindowConfigWatcher="*res://Scripts/autoload/WindowConfigWatcher.gd"
+WindowWatcher="*res://Scripts/autoload/WindowWatcher.gd"
 ConfigWatcher="*res://Scripts/autoload/ConfigWatcher.gd"
 
 [input]

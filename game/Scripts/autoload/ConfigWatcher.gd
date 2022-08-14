@@ -21,21 +21,21 @@ func _ready():
 func init():
 	# Initialize configurations
 	if get_audio_config().init(PATH_CONFIG) == OK:
-		print("Initialized Audio configuration for watcher")
+		print("Initialized Audio configuration watcher")
 	else:
-		printerr("Failed to init Audio configuration for watcher")
+		printerr("Failed to init Audio configuration watcher")
 	if get_graphics_config().init(PATH_CONFIG) == OK:
-		print("Initialized Display configuration for watcher")
+		print("Initialized Display configuration watcher")
 	else:
-		printerr("Failed to init Display configuration for watcher")
+		printerr("Failed to init Display configuration watcher")
 	if get_lobby_config().init(PATH_CONFIG) == OK:
-		print("Initialized Lobby configuration for watcher")
+		print("Initialized Lobby configuration watcher")
 	else:
-		printerr("Failed to init Lobby configuration for watcher")
+		printerr("Failed to init Lobby configuration watcher")
 	if get_player_config().init(PATH_CONFIG) == OK:
-		print("Initialized Player configuration for watcher")
+		print("Initialized Player configuration watcher")
 	else:
-		printerr("Failed to init Player configuration for watcher")
+		printerr("Failed to init Player configuration watcher")
 
 func save():
 	# Save configurations

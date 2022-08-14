@@ -20,6 +20,11 @@ func _input(event):
 	if event is InputEventMouseButton or event is InputEventScreenTouch:
 		# Release edit focus for PlayerName when background is touched or pressed
 		if event.is_pressed():
+			if PlayerName.get_text().length() < 1:
+				var default_name = "Player-" + String(OS.get_process_id())
+				PlayerName.set_text(default_name)
+				PlayerName.emit_signal("text_changed", default_name)
+			
 			PlayerName.release_focus()
 	if event is InputEventMouseMotion:
 		# Show the mouse cursor if moved
@@ -89,12 +94,6 @@ func reset_opt_selection():
 	update_opt_selection()
 
 func _on_PlayerName_text_changed(new_text):
-	if new_text.length() < 1:
-		var default_name = "Player-" + String(OS.get_process_id())
-		PlayerName.set_text(default_name)
-		PlayerName.emit_signal("text_changed", default_name)
-		return
-	
 	ConfigWatcher.get_player_config().set_player_name(new_text)
 	ConfigWatcher.save()
 

@@ -12,7 +12,6 @@ onready var PlayerLimitCount = $"Root/Contents/PlayerLimitContent/PlayerLimitCou
 onready var MapSelection = $"Root/Contents/MapSelectionContent/MapSelection"
 onready var StartOption = $"Root/Contents/OptionsContent/StartOption"
 onready var BackOption = $"Root/Contents/OptionsContent/BackOption"
-onready var UiBackPlayer = $"UiBackPlayer"
 onready var UiNavigatePlayer = $"UiNavigatePlayer"
 onready var UiSelectPlayer = $"UiSelectPlayer"
 
@@ -73,10 +72,7 @@ func handle_opt_selection():
 	if UiNavigatePlayer.is_playing():
 		UiNavigatePlayer.stop()
 	
-	if option_selection != 1:
-		UiSelectPlayer.play()
-	else:
-		UiBackPlayer.play()
+	UiSelectPlayer.play()
 	
 	if option_selection == -1:
 		option_selection = 0

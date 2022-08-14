@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/menu/lobby/LobbyJoinMenu.gd" type="Script" id=1]
 [ext_resource path="res://Assets/sfx/ui-navigate.wav" type="AudioStream" id=2]
 [ext_resource path="res://Assets/sfx/ui-select.wav" type="AudioStream" id=3]
-[ext_resource path="res://Assets/sfx/ui-back.wav" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://Assets/fonts/Extrude.ttf"
@@ -118,16 +117,14 @@ custom_fonts/font = SubResource( 4 )
 text = "Back"
 align = 2
 
-[node name="UiBackPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )
-bus = "In-Game"
-
 [node name="UiNavigatePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
+volume_db = -15.0
 bus = "In-Game"
 
 [node name="UiSelectPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+volume_db = -15.0
 bus = "In-Game"
 
 [connection signal="focus_entered" from="Root/Contents/ServerAddress" to="." method="_on_ServerAddress_focus_entered"]

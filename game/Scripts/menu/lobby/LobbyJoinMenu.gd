@@ -9,7 +9,6 @@ onready var ServerAddress = $"Root/Contents/ServerAddress"
 onready var ServerPort = $"Root/Contents/ServerPort"
 onready var JoinOption = $"Root/Contents/OptionContents/JoinOption"
 onready var BackOption = $"Root/Contents/OptionContents/BackOption"
-onready var UiBackPlayer = $"UiBackPlayer"
 onready var UiNavigatePlayer = $"UiNavigatePlayer"
 onready var UiSelectPlayer = $"UiSelectPlayer"
 
@@ -61,10 +60,7 @@ func handle_opt_selection():
 	if UiNavigatePlayer.is_playing():
 		UiNavigatePlayer.stop()
 	
-	if option_selection != 1:
-		UiSelectPlayer.play()
-	else:
-		UiBackPlayer.play()
+	UiSelectPlayer.play()
 	
 	if option_selection == -1:
 		option_selection = 0

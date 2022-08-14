@@ -9,7 +9,7 @@ onready var JoinOption = $"Root/MarginContents/Contents/JoinOption"
 onready var HostOption = $"Root/MarginContents/Contents/HostOption"
 onready var BackOption = $"Root/MarginContents/Contents/BackOption"
 onready var PlayerName = $"Root/MarginContents/Contents/PlayerName"
-onready var UiBackPlayer = $"UiBackPlayer"
+onready var UiInaccessiblePlayer = $"UiInaccessiblePlayer"
 onready var UiNavigatePlayer = $"UiNavigatePlayer"
 onready var UiSelectPlayer = $"UiSelectPlayer"
 
@@ -62,13 +62,15 @@ func handle_opt_selection():
 	if option_selection != 2:
 		if PlayerName.get_text().length() < 1:
 			# Put your name first before proceeding to join/create lobbies
-			if UiBackPlayer.is_playing(): UiBackPlayer.stop()
-			UiBackPlayer.play()
+			if UiInaccessiblePlayer.is_playing():
+				UiInaccessiblePlayer.stop()
+			
+			UiInaccessiblePlayer.play()
 			return
 		
 		UiSelectPlayer.play()
 	else:
-		UiBackPlayer.play()
+		UiInaccessiblePlayer.play()
 	
 	if option_selection == -1:
 		option_selection = 0

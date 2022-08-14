@@ -98,10 +98,12 @@ text = "Quit"
 
 [node name="UiNavigatePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
+volume_db = -15.0
 bus = "In-Game"
 
 [node name="UiSelectPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+volume_db = -15.0
 bus = "In-Game"
 
 [connection signal="gui_input" from="Root/MarginContents/Contents/PlayOption" to="." method="_on_PlayOption_gui_input"]

@@ -106,6 +106,12 @@ func reset_opt_selection():
 	update_opt_selection()
 
 func _on_PlayerName_text_changed(new_text):
+	if new_text.length() < 1:
+		var default_name = "Player-" + String(OS.get_process_id())
+		PlayerName.set_text(default_name)
+		PlayerName.emit_signal("text_changed", default_name)
+		return
+	
 	ConfigWatcher.get_player_config().set_player_name(new_text)
 	ConfigWatcher.save()
 

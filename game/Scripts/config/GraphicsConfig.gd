@@ -2,12 +2,16 @@ extends Node
 
 var cfg = ConfigFile.new()
 
-const FULLSCREEN = "fullscreen"
-const HEIGHT = "height"
-const MAXIMIZE = "maximize"
+const DISPLAY_MODE = "display-mode"
 const RENDERER = "renderer"
+const MAXIMIZE = "maximize"
 const SHADOWS = "shadows"
-const WIDTH = "width"
+const WINDOW_HEIGHT = "window-height"
+const WINDOW_WIDTH = "window-width"
+
+enum DisplayMode {
+	Fullscreen, Windowed, Borderless
+}
 
 func init(path: String) -> int:
 	var err = get_cfg().load(path)
@@ -24,17 +28,11 @@ func set_cfg(new_cfg: ConfigFile):
 func get_cfg() -> ConfigFile:
 	return cfg
 
-func set_fullscreen(toggle: bool):
-	set_value(FULLSCREEN, toggle)
+func set_display_mode(mode: int):
+	set_value(DISPLAY_MODE, mode)
 
-func is_fullscreen(default = false) -> bool:
-	return get_value(FULLSCREEN, default)
-
-func set_height(value: float):
-	set_value(HEIGHT, value)
-
-func get_height(default = 600.0) -> float:
-	return get_value(HEIGHT, default)
+func get_display_mode(default = DisplayMode.Windowed) -> int:
+	return get_value(DISPLAY_MODE, default)
 
 func set_maximize(toggle: bool):
 	set_value(MAXIMIZE, toggle)
@@ -54,11 +52,13 @@ func set_shadows(toggle: bool):
 func are_shadows_enabled(default = true) -> bool:
 	return get_value(SHADOWS, default)
 
-func set_width(value: float):
-	set_value(WIDTH, value)
+func set_window_size(value: Vector2):
+	set_value(WINDOW_WIDTH, value.x)
+	set_value(WINDOW_HEIGHT, value.y)
 
-func get_width(default = 1024.0) -> float:
-	return get_value(WIDTH, default)
+func get_window_size(default = Vector2(1024.0, 600.0)) -> Vector2:
+	return Vector2(get_value(WINDOW_WIDTH, default.x),
+			get_value(WINDOW_HEIGHT, default.y))
 
 func set_value(key, value):
 	get_cfg().set_value("Graphics", key, value)

@@ -28,11 +28,12 @@ func init_audio_config():
 func init_graphics_config():
 	# Initialize display based on saved configuration
 	var config = ConfigWatcher.get_graphics_config()
-	var size = Vector2(config.get_width(), config.get_height())
-	OS.set_window_fullscreen(config.is_fullscreen())
+	var size = config.get_window_size()
+	var is_fullscreen = config.get_display_mode() == 0
+	OS.set_window_fullscreen(is_fullscreen)
 	OS.set_window_maximized(config.is_maximized())
 	
-	if not config.is_fullscreen():
+	if not is_fullscreen:
 		OS.set_window_size(size)
 	else:
 		get_viewport().set_size(size)

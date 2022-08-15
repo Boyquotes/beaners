@@ -13,6 +13,9 @@ onready var PlayerName = $"Root/MarginContents/Contents/PlayerName"
 export var option_selection = -1
 
 func _ready():
+	# Terminate recently joined/made lobby if came from PauseOverlay
+	get_tree().set_network_peer(null)
+	
 	# Set player name from saved configuration
 	PlayerName.set_text(ConfigWatcher.get_player_config().get_player_name())
 

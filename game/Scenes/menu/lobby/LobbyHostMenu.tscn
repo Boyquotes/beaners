@@ -132,9 +132,9 @@ margin_bottom = 600.0
 
 [node name="Contents" type="VBoxContainer" parent="Root"]
 margin_left = 329.0
-margin_top = 185.0
+margin_top = 202.0
 margin_right = 695.0
-margin_bottom = 414.0
+margin_bottom = 397.0
 custom_constants/separation = 10
 alignment = 1
 
@@ -145,23 +145,10 @@ custom_fonts/font = SubResource( 2 )
 text = "Create a Lobby"
 align = 1
 
-[node name="ServerAddress" type="LineEdit" parent="Root/Contents"]
+[node name="ServerPort" type="LineEdit" parent="Root/Contents"]
 margin_top = 58.0
 margin_right = 366.0
 margin_bottom = 82.0
-size_flags_vertical = 4
-custom_constants/minimum_spaces = 30
-custom_fonts/font = SubResource( 6 )
-custom_styles/focus = SubResource( 7 )
-custom_styles/normal = SubResource( 8 )
-max_length = 30
-placeholder_text = "Server address"
-caret_blink = true
-
-[node name="ServerPort" type="LineEdit" parent="Root/Contents"]
-margin_top = 92.0
-margin_right = 366.0
-margin_bottom = 116.0
 size_flags_vertical = 4
 custom_constants/minimum_spaces = 30
 custom_fonts/font = SubResource( 6 )
@@ -172,9 +159,9 @@ placeholder_text = "Port"
 caret_blink = true
 
 [node name="PlayerLimitContent" type="HBoxContainer" parent="Root/Contents"]
-margin_top = 126.0
+margin_top = 92.0
 margin_right = 366.0
-margin_bottom = 150.0
+margin_bottom = 116.0
 
 [node name="PlayerLimitLabel" type="Label" parent="Root/Contents/PlayerLimitContent"]
 margin_right = 160.0
@@ -213,9 +200,9 @@ text = "1"
 align = 1
 
 [node name="MapSelectionContent" type="HBoxContainer" parent="Root/Contents"]
-margin_top = 160.0
+margin_top = 126.0
 margin_right = 366.0
-margin_bottom = 184.0
+margin_bottom = 150.0
 
 [node name="MapSelectionLabel" type="Label" parent="Root/Contents/MapSelectionContent"]
 margin_right = 32.0
@@ -244,9 +231,9 @@ text = "None"
 align = 1
 
 [node name="OptionsContent" type="HBoxContainer" parent="Root/Contents"]
-margin_top = 194.0
+margin_top = 160.0
 margin_right = 366.0
-margin_bottom = 229.0
+margin_bottom = 195.0
 
 [node name="StartOption" type="Label" parent="Root/Contents/OptionsContent"]
 margin_right = 60.0
@@ -270,9 +257,6 @@ custom_fonts/font = SubResource( 4 )
 text = "Back"
 align = 2
 
-[connection signal="focus_entered" from="Root/Contents/ServerAddress" to="." method="_on_ServerAddress_focus_entered"]
-[connection signal="focus_exited" from="Root/Contents/ServerAddress" to="." method="_on_ServerAddress_focus_exited"]
-[connection signal="text_changed" from="Root/Contents/ServerAddress" to="." method="_on_ServerAddress_text_changed"]
 [connection signal="focus_entered" from="Root/Contents/ServerPort" to="." method="_on_ServerPort_focus_entered"]
 [connection signal="focus_exited" from="Root/Contents/ServerPort" to="." method="_on_ServerPort_focus_exited"]
 [connection signal="text_changed" from="Root/Contents/ServerPort" to="." method="_on_ServerPort_text_changed"]

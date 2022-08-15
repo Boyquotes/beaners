@@ -5,7 +5,6 @@ var hover_font_color = Color("#D3D3D3")
 
 var is_typing = false
 
-onready var ServerAddress = $"Root/Contents/ServerAddress"
 onready var ServerPort = $"Root/Contents/ServerPort"
 onready var PlayerLimit = $"Root/Contents/PlayerLimitContent/PlayerLimit"
 onready var PlayerLimitCount = $"Root/Contents/PlayerLimitContent/PlayerLimitCount"
@@ -22,17 +21,15 @@ func _ready():
 	MapSelection.add_item("Waterland", 2)
 	MapSelection.add_item("Tutorial", 3)
 	
-	# Set map selection, player limit, server address and port from saved configuration
-	MapSelection.select(ConfigWatcher.get_lobby_config().get_host_map_selection())
-	ServerAddress.set_text(ConfigWatcher.get_lobby_config().get_host_server_address())
+	# Set map selection, player limit, and port from saved configuration
 	ServerPort.set_text(ConfigWatcher.get_lobby_config().get_host_server_port())
 	PlayerLimit.set_value(ConfigWatcher.get_lobby_config().get_host_player_limit())
+	MapSelection.select(ConfigWatcher.get_lobby_config().get_host_map_selection())
 
 func _input(event):
 	if event is InputEventMouseButton or event is InputEventScreenTouch:
 		# Release edit focus for PlayerName when background is touched or pressed
 		if event.is_pressed():
-			ServerAddress.release_focus()
 			ServerPort.release_focus()
 			PlayerLimit.release_focus()
 	if event is InputEventMouseMotion:
@@ -72,8 +69,26 @@ func handle_opt_selection():
 	if option_selection == -1:
 		option_selection = 0
 	if option_selection == 0:
-		# TODO: Implement join screen
-		print("TODO: Implement join screen")
+		var peer = NetworkedMultiplayerENet.new()
+		var player_limit = int(PlayerLimit.get_value())
+		
+		var err = peer.create_server(int(ServerPort.get_text()),
+			player_limit if player_limit > 0 else 4095)
+		
+		if err == ERR_CANT_CREATE:
+			UiSoundGlobals.Inaccessible.play()
+			printerr("Cannot create lobby.")
+			return
+		elif err == ERR_ALREADY_IN_USE:
+			UiSoundGlobals.Inaccessible.play()
+			printerr("Lobby already in-use.")
+			return
+		
+		get_tree().set_network_peer(peer)
+		
+		if MapSelection.get_selected() == 3:
+			# warning-ignore:return_value_discarded
+			get_tree().change_scene("res://Scenes/maps/Tutorial.tscn")
 	elif option_selection == 1:
 		# warning-ignore:return_value_discarded
 		get_tree().change_scene("res://Scenes/menu/LobbyMenu.tscn")
@@ -95,10 +110,6 @@ func update_opt_selection():
 func reset_opt_selection():
 	option_selection = -1
 	update_opt_selection()
-
-func _on_ServerAddress_text_changed(new_text):
-	ConfigWatcher.get_lobby_config().set_host_server_address(new_text)
-	ConfigWatcher.save()
 
 func _on_ServerPort_text_changed(new_text):
 	if not new_text.is_valid_integer():

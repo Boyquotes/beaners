@@ -15,6 +15,10 @@ func _init():
 
 func _ready():
 	# Initialize sound effects
+	Inaccessible.set_pause_mode(Node.PAUSE_MODE_PROCESS)
+	Navigate.set_pause_mode(Node.PAUSE_MODE_PROCESS)
+	Select.set_pause_mode(Node.PAUSE_MODE_PROCESS)
+	
 	Inaccessible.set_stream(load(INACCESSIBLE_PATH))
 	Navigate.set_stream(load(NAVIGATE_PATH))
 	Select.set_stream(load(SELECT_PATH))

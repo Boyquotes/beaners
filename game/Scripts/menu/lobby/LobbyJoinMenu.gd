@@ -60,8 +60,19 @@ func handle_opt_selection():
 	if option_selection == -1:
 		option_selection = 0
 	if option_selection == 0:
-		# TODO: Implement join screen
-		print("TODO: Implement join screen")
+		var peer = NetworkedMultiplayerENet.new()
+		
+		var err = peer.create_client(ServerAddress.get_text(),
+			int(ServerPort.get_text()))
+		
+		if err != OK:
+			printerr("There was something wrong about joining the lobby.")
+			return 
+		
+		get_tree().set_network_peer(peer)
+		
+		# warning-ignore:return_value_discarded
+		get_tree().change_scene("res://Scenes/maps/Tutorial.tscn")
 	elif option_selection == 1:
 		# warning-ignore:return_value_discarded
 		get_tree().change_scene("res://Scenes/menu/LobbyMenu.tscn")

@@ -54,8 +54,8 @@ func set_remote_server_address(value: String):
 func get_remote_server_address(default = ""):
 	return get_value(REMOTE_SERVER_ADDRESS, default)
 
-func set_remote_server_port(default = ""):
-	return get_value(REMOTE_SERVER_PORT, default)
+func set_remote_server_port(value: String):
+	set_value(REMOTE_SERVER_PORT, value)
 
 func get_remote_server_port(default = ""):
 	return get_value(REMOTE_SERVER_PORT, default)

@@ -30,10 +30,6 @@ func init_graphics_config():
 	var config = ConfigWatcher.get_graphics_config()
 	var size = config.get_window_size()
 	var is_fullscreen = config.get_display_mode() == 0
+	if not is_fullscreen: OS.set_window_size(size)
 	OS.set_window_fullscreen(is_fullscreen)
 	OS.set_window_maximized(config.is_maximized())
-	
-	if not is_fullscreen:
-		OS.set_window_size(size)
-	else:
-		get_viewport().set_size(size)

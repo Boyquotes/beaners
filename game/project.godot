@@ -20,8 +20,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-WindowWatcher="*res://Scripts/autoload/WindowWatcher.gd"
 ConfigWatcher="*res://Scripts/autoload/ConfigWatcher.gd"
+WindowWatcher="*res://Scripts/autoload/WindowWatcher.gd"
 UiSoundGlobals="*res://Scripts/autoload/UiSoundGlobals.gd"
 
 [input]

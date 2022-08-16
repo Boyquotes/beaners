@@ -11,7 +11,7 @@ const SELECT_PATH = "res://Assets/sfx/ui-select.wav"
 const UI_BUS = "In-Game"
 
 func _init():
-	print("Initialized UI sound globals")
+	print("Initialized UI Sound Globals")
 
 func _ready():
 	# Initialize sound effects

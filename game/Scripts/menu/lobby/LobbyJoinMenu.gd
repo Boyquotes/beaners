@@ -117,12 +117,10 @@ func get_error() -> String:
 
 func set_connecting(mode: bool):
 	if mode:
-		ConnectOption.add_color_override("font_color", hover_font_color)
 		ConnectOption.set_process(false)
 		ConnectOption.set_process_input(false)
 		ConnectOption.set_text("Connecting")
 	elif not mode:
-		ConnectOption.add_color_override("font_color", default_font_color)
 		ConnectOption.set_process(true)
 		ConnectOption.set_process_input(true)
 		ConnectOption.set_text("Connect")

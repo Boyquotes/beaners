@@ -33,7 +33,8 @@ func _ready():
 		add_child(HUDOverlay)
 
 func _input(event):
-	if event is InputEventMouseMotion and is_network_master() and not is_paused():
+	if is_paused(): return
+	if event is InputEventMouseMotion and is_network_master():
 		rotate_y(deg2rad(-event.relative.x * mouse_sense))
 		Head.rotate_x(deg2rad(-event.relative.y * mouse_sense))
 		Head.rotation.x = clamp(Head.rotation.x, deg2rad(-89), deg2rad(89))
@@ -57,7 +58,8 @@ func _process(delta):
 		Camera.global_transform = Head.global_transform
 
 func _physics_process(delta):
-	if not is_network_master() and not is_paused(): return
+	if is_paused(): return
+	if not is_network_master(): return
 	direction = Vector3.ZERO
 	var h_rot = global_transform.basis.get_euler().y
 	var f_input = Input.get_action_strength("game_move_down") - Input.get_action_strength("game_move_up")

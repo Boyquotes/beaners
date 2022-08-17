@@ -1,5 +1,7 @@
 extends Spatial
 
+onready var DisconnectedDialog = $"Dialogs/DisconnectedDialog"
+
 onready var Logs = $"Logs"
 onready var Players = $"Players"
 
@@ -12,8 +14,8 @@ func _ready():
 	get_tree().connect("server_disconnected", self, "_lobby_disconnected")
 	create_player(get_tree().get_network_unique_id())
 	
-	# if not is_network_master():
-		# Logs.msg("Welcome to " + String(get_tree()) + "'s lobby!")
+	if not is_network_master():
+		Logs.msg("Welcome to the joined lobby!")
 	
 	for peer in get_tree().get_network_connected_peers():
 		create_player(peer)
@@ -38,7 +40,14 @@ func _player_disconnected(id):
 	destroy_player(id)
 
 func _lobby_disconnected():
-	Logs.msg("You were disconnected from the lobby.")
-	get_tree().disconnect("network_peer_connected", self, "_player_connected")
-	get_tree().disconnect("network_peer_disconnected", self, "_player_disconnected")
-	get_tree().disconnect("server_disconnected", self, "_lobby_disconnected")
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	DisconnectedDialog.set_visible(true)
+	
+	for player in Players.get_children():
+		Players.remove_child(player)
+		player.queue_free()
+
+func _on_DisconnectedDialog_confirmed():
+	get_tree().set_network_peer(null)
+	# warning-ignore:return_value_discarded
+	get_tree().change_scene("res://Scenes/menu/LobbyMenu.tscn")

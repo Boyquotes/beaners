@@ -37,6 +37,7 @@ func _input(event):
 		rotate_y(deg2rad(-event.relative.x * mouse_sense))
 		Head.rotate_x(deg2rad(-event.relative.y * mouse_sense))
 		Head.rotation.x = clamp(Head.rotation.x, deg2rad(-89), deg2rad(89))
+		rpc("update_head", Head.get_translation(), Head.get_rotation())
 
 func _process(delta):
 	if not is_network_master():
@@ -81,6 +82,14 @@ func _physics_process(delta):
 	
 	# warning-ignore:return_value_discarded
 	move_and_slide_with_snap(movement, snap, Vector3.UP)
+	rpc("update_player", get_translation())
+
+puppetsync func update_player(translation: Vector3):
+	set_translation(translation)
+
+puppetsync func update_head(translation: Vector3, rotation: Vector3):
+	Head.set_translation(translation)
+	Head.set_rotation(rotation)
 
 func pause():
 	if is_paused(): return

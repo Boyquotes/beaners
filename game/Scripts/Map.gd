@@ -11,6 +11,12 @@ func _ready():
 	# warning-ignore:return_value_discarded
 	get_tree().connect("server_disconnected", self, "_lobby_disconnected")
 	create_player(get_tree().get_network_unique_id())
+	
+	# if not is_network_master():
+		# Logs.msg("Welcome to " + String(get_tree()) + "'s lobby!")
+	
+	for peer in get_tree().get_network_connected_peers():
+		create_player(peer)
 
 func create_player(id: int):
 	var player = preload("res://Scenes/Player.tscn").instance()
@@ -24,11 +30,7 @@ func destroy_player(id: int):
 	player.queue_free()
 
 func _player_connected(id):
-	if id > 1:
-		Logs.msg(String(id) + " has joined!")
-	else:
-		Logs.msg("Welcome to " + String(id) + "'s lobby!")
-	
+	Logs.msg(String(id) + " has joined!")
 	create_player(id)
 
 func _player_disconnected(id):
@@ -36,5 +38,7 @@ func _player_disconnected(id):
 	destroy_player(id)
 
 func _lobby_disconnected():
-	get_tree().set_network_peer(null)
 	Logs.msg("You were disconnected from the lobby.")
+	get_tree().disconnect("network_peer_connected", self, "_player_connected")
+	get_tree().disconnect("network_peer_disconnected", self, "_player_disconnected")
+	get_tree().disconnect("server_disconnected", self, "_lobby_disconnected")

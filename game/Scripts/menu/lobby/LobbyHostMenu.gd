@@ -9,6 +9,7 @@ onready var ServerPort = $"Root/Contents/ServerPort"
 onready var PlayerLimit = $"Root/Contents/PlayerLimitContent/PlayerLimit"
 onready var PlayerLimitCount = $"Root/Contents/PlayerLimitContent/PlayerLimitCount"
 onready var MapSelection = $"Root/Contents/MapSelectionContent/MapSelection"
+onready var Error = $"Root/Contents/Error"
 onready var StartOption = $"Root/Contents/OptionsContent/StartOption"
 onready var BackOption = $"Root/Contents/OptionsContent/BackOption"
 
@@ -69,6 +70,7 @@ func handle_opt_selection():
 	if option_selection == -1:
 		option_selection = 0
 	if option_selection == 0:
+		var selection = MapSelection.get_selected()
 		var peer = NetworkedMultiplayerENet.new()
 		var player_limit = int(PlayerLimit.get_value())
 		
@@ -77,16 +79,16 @@ func handle_opt_selection():
 		
 		if err == ERR_CANT_CREATE:
 			UiSoundGlobals.Inaccessible.play()
-			printerr("Cannot create lobby.")
+			set_error("Cannot create lobby.")
 			return
 		elif err == ERR_ALREADY_IN_USE:
 			UiSoundGlobals.Inaccessible.play()
-			printerr("Lobby already in-use.")
+			set_error("Lobby currently in-use.")
 			return
 		
 		get_tree().set_network_peer(peer)
 		
-		if MapSelection.get_selected() == 3:
+		if selection == 3:
 			# warning-ignore:return_value_discarded
 			get_tree().change_scene("res://Scenes/maps/Tutorial.tscn")
 	elif option_selection == 1:
@@ -110,6 +112,13 @@ func update_opt_selection():
 func reset_opt_selection():
 	option_selection = -1
 	update_opt_selection()
+
+func set_error(text: String):
+	if not Error.is_visible(): Error.set_visible(true)
+	Error.set_text(text)
+
+func get_error() -> String:
+	return Error.get_text()
 
 func _on_ServerPort_text_changed(new_text):
 	if not new_text.is_valid_integer():

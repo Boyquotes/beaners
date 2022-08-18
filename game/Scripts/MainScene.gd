@@ -7,7 +7,7 @@ func _ready():
 	
 	# warning-ignore:return_value_discarded 
 	# Switch to main menu scene
-	get_tree().change_scene("res://Scenes/menu/MainMenu.tscn")
+	get_tree().change_scene("res://Scenes/Menu.tscn")
 
 func init_audio_config():
 	# Initialize sound based on saved configuration

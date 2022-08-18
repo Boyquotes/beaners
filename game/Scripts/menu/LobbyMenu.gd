@@ -73,7 +73,7 @@ func handle_opt_selection():
 		get_tree().change_scene("res://Scenes/menu/lobby/LobbyHostMenu.tscn")
 	elif option_selection == 2:
 		# warning-ignore:return_value_discarded
-		get_tree().change_scene("res://Scenes/menu/MainMenu.tscn")
+		get_tree().change_scene("res://Scenes/Menu.tscn")
 
 func update_opt_selection():
 	# This function must be called after option_selection has changed

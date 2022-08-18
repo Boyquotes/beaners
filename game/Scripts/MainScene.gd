@@ -12,18 +12,16 @@ func _ready():
 func init_audio_config():
 	# Initialize sound based on saved configuration
 	var config = ConfigWatcher.get_audio_config()
+	var devices = AudioServer.get_device_list()
+	var voice_devices = AudioServer.capture_get_device_list()
 	
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("In-Game"),
 		config.get_ingame_volume())
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Voice"),
 		config.get_voice_volume())
 	
-	AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"),
-		config.is_muted())
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("In-Game"),
-		config.is_muted())
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Voice"),
-		config.is_muted())
+	AudioServer.set_device(devices[config.get_device()])
+	AudioServer.capture_set_device(voice_devices[config.get_voice_device()])
 
 func init_graphics_config():
 	# Initialize display based on saved configuration

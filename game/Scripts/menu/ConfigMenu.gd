@@ -3,10 +3,11 @@ extends MarginContainer
 var default_font_color = Color(1, 1, 1, 1)
 var hover_font_color = Color("#D3D3D3")
 
-onready var PlayOption = $"Root/MarginContents/Contents/PlayOption"
-onready var SettingsOption = $"Root/MarginContents/Contents/SettingsOption"
-onready var HelpOption = $"Root/MarginContents/Contents/HelpOption"
-onready var QuitOption = $"Root/MarginContents/Contents/QuitOption"
+var is_typing = false
+
+onready var AudioOption = $"Root/MarginContents/Contents/AudioOption"
+onready var GraphicsOption = $"Root/MarginContents/Contents/GraphicsOption"
+onready var BackOption = $"Root/MarginContents/Contents/BackOption"
 
 export var option_selection = -1
 
@@ -20,21 +21,25 @@ func _input(event):
 
 func _process(_delta):
 	# React to left-and-right input actions for options
-	if Input.is_action_just_pressed("ui_right"):
-		if option_selection < 3:
+	if Input.is_action_just_pressed("ui_right") and not is_typing:
+		if option_selection < 2:
 			option_selection += 1
 		
 		update_opt_selection()
-	elif Input.is_action_just_pressed("ui_left"):
+	elif Input.is_action_just_pressed("ui_left") and not is_typing:
 		if option_selection > 0:
 			option_selection -= 1
 		elif option_selection == -1:
-			option_selection = 3
+			option_selection = 2
 		
 		update_opt_selection()
 		
 	# Call handle_opt_selection for the accept input action
 	if Input.is_action_just_pressed("ui_accept"):
+		handle_opt_selection()
+	# Return to main menu for the cancel input action
+	if Input.is_action_just_pressed("ui_cancel"):
+		option_selection = 2
 		handle_opt_selection()
 
 func handle_opt_selection():
@@ -45,96 +50,75 @@ func handle_opt_selection():
 		option_selection = 0
 	if option_selection == 0:
 		# warning-ignore:return_value_discarded
-		get_tree().change_scene("res://Scenes/menu/LobbyMenu.tscn")
+		get_tree().change_scene("res://Scenes/menu/config/AudioConfigMenu.tscn")
 	elif option_selection == 1:
-		# warning-ignore:return_value_discarded
-		get_tree().change_scene("res://Scenes/menu/ConfigMenu.tscn")
+		print("TODO: Implement video configuration screen")
 	elif option_selection == 2:
-		# TODO: Implement help screen
-		print("TODO: Implement help screen")
-	elif option_selection == 3:
-		get_tree().quit()
+		# warning-ignore:return_value_discarded
+		get_tree().change_scene("res://Scenes/Menu.tscn")
 
 func update_opt_selection():
 	# This function must be called after option_selection has changed
 	# Reset all the options first before doing anything else
-	PlayOption.add_color_override("font_color", default_font_color)
-	SettingsOption.add_color_override("font_color", default_font_color)
-	HelpOption.add_color_override("font_color", default_font_color)
-	QuitOption.add_color_override("font_color", default_font_color)
+	AudioOption.add_color_override("font_color", default_font_color)
+	GraphicsOption.add_color_override("font_color", default_font_color)
+	BackOption.add_color_override("font_color", default_font_color)
 	
 	if option_selection != -1: UiSoundGlobals.Navigate.play()
 	
 	# Then do something to the options depending on the selection
 	if option_selection == 0:
-		PlayOption.add_color_override("font_color", hover_font_color)
+		AudioOption.add_color_override("font_color", hover_font_color)
 	elif option_selection == 1:
-		SettingsOption.add_color_override("font_color", hover_font_color)
+		GraphicsOption.add_color_override("font_color", hover_font_color)
 	elif option_selection == 2:
-		HelpOption.add_color_override("font_color", hover_font_color)
-	elif option_selection == 3:
-		QuitOption.add_color_override("font_color", hover_font_color)
+		BackOption.add_color_override("font_color", hover_font_color)
 
 func reset_opt_selection():
 	option_selection = -1
 	update_opt_selection()
 
-func _on_PlayOption_mouse_entered():
+func _on_AudioOption_mouse_entered():
 	if option_selection == 0: return
 	option_selection = 0
 	update_opt_selection()
 
-func _on_SettingsOption_mouse_entered():
+func _on_GraphicsOption_mouse_entered():
 	if option_selection == 1: return
 	option_selection = 1
 	update_opt_selection()
 
-func _on_HelpOption_mouse_entered():
+func _on_BackOption_mouse_entered():
 	if option_selection == 2: return
 	option_selection = 2
 	update_opt_selection()
 
-func _on_QuitOption_mouse_entered():
-	if option_selection == 3: return
-	option_selection = 3
-	update_opt_selection()
-
-func _on_PlayOption_mouse_exited():
+func _on_AudioOption_mouse_exited():
 	reset_opt_selection()
 
-func _on_SettingsOption_mouse_exited():
+func _on_GraphicsOption_mouse_exited():
 	reset_opt_selection()
 
-func _on_HelpOption_mouse_exited():
+func _on_BackOption_mouse_exited():
 	reset_opt_selection()
 
-func _on_QuitOption_mouse_exited():
-	reset_opt_selection()
-
-func _on_PlayOption_gui_input(event):
+func _on_AudioOption_gui_input(event):
 	if event is InputEventMouseButton and event.is_pressed():
 		handle_opt_selection()
 	if event is InputEventScreenTouch and event.is_pressed():
 		option_selection = 0
 		handle_opt_selection()
 
-func _on_SettingsOption_gui_input(event):
+func _on_GraphicsOption_gui_input(event):
 	if event is InputEventMouseButton and event.is_pressed():
 		handle_opt_selection()
 	if event is InputEventScreenTouch and event.is_pressed():
 		option_selection = 1
 		handle_opt_selection()
 
-func _on_HelpOption_gui_input(event):
+func _on_BackOption_gui_input(event):
 	if event is InputEventMouseButton and event.is_pressed():
 		handle_opt_selection()
 	if event is InputEventScreenTouch and event.is_pressed():
 		option_selection = 2
-		handle_opt_selection()
-
-func _on_QuitOption_gui_input(event):
-	if event is InputEventMouseButton and event.is_pressed():
-		handle_opt_selection()
-	if event is InputEventScreenTouch and event.is_pressed():
-		option_selection = 3
 		handle_opt_selection()

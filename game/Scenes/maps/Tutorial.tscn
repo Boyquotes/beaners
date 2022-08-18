@@ -9,6 +9,7 @@
 [node name="Tutorial" type="Spatial"]
 
 [node name="BaseMap" parent="." instance=ExtResource( 1 )]
+fallzone = -100
 
 [node name="Sun" type="DirectionalLight" parent="."]
 shadow_enabled = true

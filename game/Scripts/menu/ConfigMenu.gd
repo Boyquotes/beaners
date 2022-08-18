@@ -4,6 +4,7 @@ var default_font_color = Color(1, 1, 1, 1)
 var hover_font_color = Color("#D3D3D3")
 
 var is_typing = false
+var is_paused = false
 
 onready var AudioOption = $"Root/MarginContents/Contents/AudioOption"
 onready var GraphicsOption = $"Root/MarginContents/Contents/GraphicsOption"
@@ -42,6 +43,12 @@ func _process(_delta):
 		option_selection = 2
 		handle_opt_selection()
 
+func set_ingame(toggle: bool):
+	is_paused = toggle
+
+func is_ingame() -> bool:
+	return is_paused
+
 func handle_opt_selection():
 	# Handle selected option, this is used when pressing the accept input action
 	UiSoundGlobals.Select.play()
@@ -49,11 +56,22 @@ func handle_opt_selection():
 	if option_selection == -1:
 		option_selection = 0
 	if option_selection == 0:
+		if is_paused:
+			var menu = preload("res://Scenes/menu/config/AudioConfigMenu.tscn").instance()
+			menu.set_ingame(is_paused)
+			add_child(menu)
+			return
+		
 		# warning-ignore:return_value_discarded
 		get_tree().change_scene("res://Scenes/menu/config/AudioConfigMenu.tscn")
 	elif option_selection == 1:
 		print("TODO: Implement video configuration screen")
 	elif option_selection == 2:
+		if is_paused:
+			get_parent().remove_child(self)
+			queue_free()
+			return
+		
 		# warning-ignore:return_value_discarded
 		get_tree().change_scene("res://Scenes/Menu.tscn")
 

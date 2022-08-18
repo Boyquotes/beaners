@@ -58,8 +58,9 @@ func _process(delta):
 		Camera.global_transform = Head.global_transform
 
 func _physics_process(delta):
-	if is_paused(): return
-	if not is_network_master(): return
+	if not is_network_master() and not is_paused():
+		return
+	
 	direction = Vector3.ZERO
 	var h_rot = global_transform.basis.get_euler().y
 	var f_input = Input.get_action_strength("game_move_down") - Input.get_action_strength("game_move_up")
@@ -75,6 +76,10 @@ func _physics_process(delta):
 		accel = ACCEL_AIR
 		gravity_vec += Vector3.DOWN * gravity * delta
 	
+	if Input.is_action_just_pressed("game_walk") and is_on_floor():
+		speed -= 3
+	elif Input.is_action_just_released("game_walk") and is_on_floor():
+		speed += 3
 	if Input.is_action_just_pressed("game_jump") and is_on_floor():
 		snap = Vector3.ZERO
 		gravity_vec = Vector3.UP * jump

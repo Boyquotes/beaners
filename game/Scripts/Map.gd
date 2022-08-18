@@ -5,6 +5,8 @@ onready var DisconnectedDialog = $"Dialogs/DisconnectedDialog"
 onready var Logs = $"Logs"
 onready var Players = $"Players"
 
+export var fallzone = -50
+
 func _ready():
 	# warning-ignore:return_value_discarded
 	get_tree().connect("network_peer_connected", self, "_player_connected")
@@ -19,6 +21,13 @@ func _ready():
 	
 	for peer in get_tree().get_network_connected_peers():
 		create_player(peer)
+
+func _physics_process(_delta):
+	for player in Players.get_children():
+		if player.get_translation().y > fallzone:
+			continue
+		
+		player.set_translation(Vector3(0, 10, 0))
 
 func create_player(id: int):
 	var player = preload("res://Scenes/Player.tscn").instance()

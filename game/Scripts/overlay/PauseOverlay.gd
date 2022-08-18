@@ -48,8 +48,9 @@ func handle_opt_selection():
 		# warning-ignore:return_value_discarded
 		get_tree().change_scene("res://Scenes/menu/LobbyMenu.tscn")
 	elif option_selection == 2:
-		# TODO: Implement settings screen
-		print("TODO: Implement settings screen")
+		var menu = preload("res://Scenes/menu/ConfigMenu.tscn").instance()
+		menu.set_ingame(true)
+		add_child(menu)
 	elif option_selection == 3:
 		get_tree().quit()
 

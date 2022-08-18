@@ -40,7 +40,7 @@ func _player_disconnected(id):
 	destroy_player(id)
 
 func _lobby_disconnected():
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE) # Workaround for pause mode
 	DisconnectedDialog.set_visible(true)
 	
 	for player in Players.get_children():

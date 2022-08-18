@@ -32,9 +32,14 @@ func _ready():
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		add_child(HUDOverlay)
 
+func _notification(what):
+	match what:
+		NOTIFICATION_WM_FOCUS_OUT:
+			if is_paused(): return
+			pause()
+
 func _input(event):
-	if is_paused(): return
-	if event is InputEventMouseMotion and is_network_master():
+	if event is InputEventMouseMotion and is_network_master() and not is_paused():
 		rotate_y(deg2rad(-event.relative.x * mouse_sense))
 		Head.rotate_x(deg2rad(-event.relative.y * mouse_sense))
 		Head.rotation.x = clamp(Head.rotation.x, deg2rad(-89), deg2rad(89))
@@ -58,10 +63,8 @@ func _process(delta):
 		Camera.global_transform = Head.global_transform
 
 func _physics_process(delta):
-	if not is_network_master() and not is_paused():
-		return
-	
-	direction = Vector3.ZERO
+	if not is_network_master(): return
+	# direction = Vector3.ZERO
 	var h_rot = global_transform.basis.get_euler().y
 	var f_input = Input.get_action_strength("game_move_down") - Input.get_action_strength("game_move_up")
 	var h_input = Input.get_action_strength("game_move_right") - Input.get_action_strength("game_move_left")
@@ -76,10 +79,17 @@ func _physics_process(delta):
 		accel = ACCEL_AIR
 		gravity_vec += Vector3.DOWN * gravity * delta
 	
+	if is_paused() and is_on_floor():
+		var up = Input.is_action_pressed("game_move_up")
+		var down = Input.is_action_pressed("game_move_down")
+		var left = Input.is_action_pressed("game_move_left")
+		var right = Input.is_action_pressed("game_move_right")
+		if up or down or left or right: return
 	if Input.is_action_just_pressed("game_walk") and is_on_floor():
 		speed -= 3
 	elif Input.is_action_just_released("game_walk") and is_on_floor():
 		speed += 3
+	
 	if Input.is_action_just_pressed("game_jump") and is_on_floor():
 		snap = Vector3.ZERO
 		gravity_vec = Vector3.UP * jump
@@ -102,15 +112,15 @@ func pause():
 	if is_paused(): return
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().set_pause(true)
-	add_child(PauseOverlay)
-	remove_child(HUDOverlay)
+	call_deferred("add_child", PauseOverlay)
+	call_deferred("remove_child", HUDOverlay)
 
 func resume():
-	if not is_paused(): return
+	if not is_paused() or PauseOverlay.has_node("ConfigMenu"): return
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	get_tree().set_pause(false)
-	remove_child(PauseOverlay)
-	add_child(HUDOverlay)
+	call_deferred("remove_child", PauseOverlay)
+	call_deferred("add_child", HUDOverlay)
 
 func is_paused():
 	return has_node("PauseOverlay")

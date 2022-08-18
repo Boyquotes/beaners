@@ -11,6 +11,9 @@ func _ready():
 func _size_changed():
 	# This function is called when root's size_changed is emitted
 	# and will save the modified window size
+	if OS.is_window_maximized() or OS.is_window_fullscreen():
+		return
+	
 	var config = ConfigWatcher.get_graphics_config()
 	var root = get_tree().get_root()
 	config.set_maximize(OS.is_window_maximized())

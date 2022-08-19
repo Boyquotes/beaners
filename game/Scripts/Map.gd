@@ -2,8 +2,9 @@ extends Spatial
 
 onready var DisconnectedDialog = $"Dialogs/DisconnectedDialog"
 
-onready var Logs = $"Logs"
 onready var Players = $"Players"
+onready var DebugCamera = $"DebugCamera"
+onready var Logs = $"Logs"
 
 export var fallzone = -50
 
@@ -21,6 +22,27 @@ func _ready():
 	
 	for peer in get_tree().get_network_connected_peers():
 		create_player(peer)
+
+func _process(_delta):
+	if Input.is_action_just_pressed("game_debug_cam"):
+		if not DebugCamera.is_current():
+			for player in Players.get_children():
+				if not player.is_network_master():
+					continue
+				
+				player.Camera.clear_current()
+				player.set_debug_cam(true)
+			
+			DebugCamera.make_current()
+		else:
+			DebugCamera.clear_current()
+			
+			for player in Players.get_children():
+				if not player.is_network_master():
+					continue
+				
+				player.Camera.make_current()
+				player.set_debug_cam(false)
 
 func _physics_process(_delta):
 	for player in Players.get_children():
@@ -58,5 +80,6 @@ func _lobby_disconnected():
 
 func _on_DisconnectedDialog_confirmed():
 	get_tree().set_network_peer(null)
+	get_tree().set_pause(false)
 	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Scenes/menu/LobbyMenu.tscn")

@@ -3,6 +3,8 @@ extends KinematicBody
 const ACCEL_DEFAULT = 7
 const ACCEL_AIR = 1
 
+var debug_cam = false
+
 var speed = 7
 var gravity = 9.8
 var jump = 5
@@ -21,6 +23,7 @@ var PauseOverlay = preload("res://Scenes/overlay/PauseOverlay.tscn").instance()
 
 onready var accel = ACCEL_DEFAULT
 
+onready var Name = $"Overlay/NameViewport/Name"
 onready var Head = $"Head"
 onready var Camera = $"Head/Camera"
 
@@ -29,24 +32,28 @@ func _ready():
 	PauseOverlay.set_name("PauseOverlay")
 	
 	if is_network_master():
+		if has_node("HUDOverlay"): add_child(HUDOverlay)
+		set_player_name(ConfigWatcher.get_player_config().get_player_name())
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		add_child(HUDOverlay)
+		Camera.make_current()
 
 func _notification(what):
 	match what:
 		NOTIFICATION_WM_FOCUS_OUT:
-			if is_paused(): return
+			if is_paused():
+				return
+			
 			pause()
 
 func _input(event):
-	if event is InputEventMouseMotion and is_network_master() and not is_paused():
+	if event is InputEventMouseMotion and is_network_master() and not is_paused() and not debug_cam:
 		rotate_y(deg2rad(-event.relative.x * mouse_sense))
 		Head.rotate_x(deg2rad(-event.relative.y * mouse_sense))
 		Head.rotation.x = clamp(Head.rotation.x, deg2rad(-89), deg2rad(89))
 		rpc("update_head", Head.get_translation(), Head.get_rotation())
 
 func _process(delta):
-	if not is_network_master():
+	if not is_network_master() and debug_cam:
 		return
 	if Input.is_action_just_pressed("ui_cancel"):
 		if not is_paused():
@@ -64,7 +71,6 @@ func _process(delta):
 
 func _physics_process(delta):
 	if not is_network_master(): return
-	# direction = Vector3.ZERO
 	var h_rot = global_transform.basis.get_euler().y
 	var f_input = Input.get_action_strength("game_move_down") - Input.get_action_strength("game_move_up")
 	var h_input = Input.get_action_strength("game_move_right") - Input.get_action_strength("game_move_left")
@@ -79,7 +85,7 @@ func _physics_process(delta):
 		accel = ACCEL_AIR
 		gravity_vec += Vector3.DOWN * gravity * delta
 	
-	if is_paused() and is_on_floor():
+	if is_paused() and is_on_floor() or debug_cam and is_on_floor():
 		var up = Input.is_action_pressed("game_move_up")
 		var down = Input.is_action_pressed("game_move_down")
 		var left = Input.is_action_pressed("game_move_left")
@@ -109,21 +115,39 @@ puppetsync func update_head(translation: Vector3, rotation: Vector3):
 	Head.set_rotation(rotation)
 
 func pause():
-	if is_paused(): return
+	if is_paused() or debug_cam: return
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().set_pause(true)
-	call_deferred("add_child", PauseOverlay)
-	call_deferred("remove_child", HUDOverlay)
+	
+	if not has_node("PauseOverlay"):
+		call_deferred("add_child", PauseOverlay)
+	if has_node("HUDOverlay"):
+		call_deferred("remove_child", HUDOverlay)
 
 func resume():
-	if not is_paused() or PauseOverlay.has_node("ConfigMenu"): return
+	if not is_paused() or debug_cam: return
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	get_tree().set_pause(false)
-	call_deferred("remove_child", PauseOverlay)
-	call_deferred("add_child", HUDOverlay)
+	
+	if has_node("PauseOverlay"):
+		call_deferred("remove_child", PauseOverlay)
+	if not has_node("HUDOverlay"):
+		call_deferred("add_child", HUDOverlay)
 
 func is_paused():
-	return has_node("PauseOverlay")
+	return has_node("PauseOverlay") or PauseOverlay.has_node("ConfigMenu")
+
+func set_player_name(value: String):
+	Name.set_text(value)
+
+func get_player_name() -> String:
+	return Name.get_text()
+
+func set_debug_cam(toggle: bool):
+	debug_cam = toggle
+
+func is_debug_cam() -> bool:
+	return debug_cam
 
 func set_hud_overlay(hud):
 	HUDOverlay = hud

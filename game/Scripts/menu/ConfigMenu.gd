@@ -40,6 +40,9 @@ func _process(_delta):
 		handle_opt_selection()
 	# Return to main menu for the cancel input action
 	if Input.is_action_just_pressed("ui_cancel"):
+		if has_node("AudioConfigMenu") and is_ingame():
+			return
+		
 		option_selection = 2
 		handle_opt_selection()
 

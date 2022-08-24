@@ -32,10 +32,11 @@ func _ready():
 	PauseOverlay.set_name("PauseOverlay")
 	
 	if is_network_master():
+		if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		
 		if has_node("HUDOverlay"): add_child(HUDOverlay)
-		set_player_name(ConfigWatcher.get_player_config().get_player_name())
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		Camera.make_current()
+		if not Camera.is_current(): Camera.make_current()
 
 func _notification(what):
 	match what:
@@ -107,35 +108,36 @@ func _physics_process(delta):
 	move_and_slide_with_snap(movement, snap, Vector3.UP)
 	rpc("update_player", get_translation())
 
-puppetsync func update_player(translation: Vector3):
+puppet func update_player(translation: Vector3):
 	set_translation(translation)
 
-puppetsync func update_head(translation: Vector3, rotation: Vector3):
+puppet func update_head(translation: Vector3, rotation: Vector3):
 	Head.set_translation(translation)
 	Head.set_rotation(rotation)
 
 func pause():
-	if is_paused() or debug_cam: return
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	get_tree().set_pause(true)
+	if is_paused() or debug_cam:
+		return
+	if Input.get_mouse_mode() != Input.MOUSE_MODE_VISIBLE:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
-	if not has_node("PauseOverlay"):
-		call_deferred("add_child", PauseOverlay)
-	if has_node("HUDOverlay"):
-		call_deferred("remove_child", HUDOverlay)
+	call_deferred("add_child", PauseOverlay)
+	get_tree().set_pause(true)
 
 func resume():
-	if not is_paused() or debug_cam: return
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	get_tree().set_pause(false)
+	if not is_paused() or debug_cam:
+		return
+	if get_node("PauseOverlay").has_node("ConfigMenu"):
+		# Workaround for the rest of the menus
+		return
+	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
-	if has_node("PauseOverlay"):
-		call_deferred("remove_child", PauseOverlay)
-	if not has_node("HUDOverlay"):
-		call_deferred("add_child", HUDOverlay)
+	call_deferred("remove_child", PauseOverlay)
+	get_tree().set_pause(false)
 
 func is_paused():
-	return has_node("PauseOverlay") or PauseOverlay.has_node("ConfigMenu")
+	return has_node("PauseOverlay")
 
 func set_player_name(value: String):
 	Name.set_text(value)

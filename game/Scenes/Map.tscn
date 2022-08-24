@@ -22,6 +22,19 @@ margin_bottom = 29.0
 window_title = ""
 dialog_text = "You have been disconnected from the lobby."
 
+[node name="FailureConnectionDialog" type="AcceptDialog" parent="Dialogs"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -153.0
+margin_top = -29.0
+margin_right = 153.0
+margin_bottom = 29.0
+window_title = ""
+dialog_text = "Failed to connect to the lobby."
+
 [node name="Players" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 
@@ -31,3 +44,4 @@ script = ExtResource( 3 )
 [node name="Logs" parent="." instance=ExtResource( 2 )]
 
 [connection signal="confirmed" from="Dialogs/DisconnectedDialog" to="." method="_on_DisconnectedDialog_confirmed"]
+[connection signal="confirmed" from="Dialogs/FailureConnectionDialog" to="." method="_on_FailureConnectionDialog_confirmed"]

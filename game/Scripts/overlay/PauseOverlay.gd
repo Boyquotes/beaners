@@ -50,9 +50,10 @@ func handle_opt_selection():
 	elif option_selection == 2:
 		var menu = preload("res://Scenes/menu/ConfigMenu.tscn").instance()
 		menu.set_ingame(true)
+		set_process(false)
 		add_child(menu)
 	elif option_selection == 3:
-		get_tree().quit()
+		AppWatcher.quit()
 
 func update_opt_selection():
 	# This function must be called after option_selection has changed

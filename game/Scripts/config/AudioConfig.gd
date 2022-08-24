@@ -5,7 +5,7 @@ var cfg = ConfigFile.new()
 const INGAME_VOLUME = "ingame-volume"
 const VOICE_VOLUME = "voice-volume"
 const DEVICE = "device"
-const VOICE_DEVICE = "microphone-device"
+const VOICE_DEVICE = "voice-device"
 
 func init(path: String) -> int:
 	var err = get_cfg().load(path)

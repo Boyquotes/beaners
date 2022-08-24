@@ -42,25 +42,8 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		# Show the mouse cursor if moved
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	if event is InputEventKey:
-		# Hide the mouse cursor if a key is pressed
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 func _process(_delta):
-	# React to left-and-right input actions for options
-	if Input.is_action_just_pressed("ui_up"):
-		if option_selection > 0:
-			option_selection -= 1
-		elif option_selection == -1:
-			option_selection = 0
-		
-		update_opt_selection()
-	elif Input.is_action_just_pressed("ui_down"):
-		if option_selection < 3:
-			option_selection += 1
-		
-		update_opt_selection()
-		
 	# Call handle_opt_selection for the accept input action
 	if Input.is_action_just_pressed("ui_accept"):
 		handle_opt_selection()
@@ -83,6 +66,7 @@ func handle_opt_selection():
 		option_selection = 1
 	if option_selection == 0:
 		if is_paused:
+			get_parent().set_process(true)
 			get_parent().remove_child(self)
 			queue_free()
 			return
@@ -131,23 +115,19 @@ func _on_InGameVolOptSlider_value_changed(value):
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("In-Game"),
 		value)
 	
-	ConfigWatcher.get_audio_config().set_ingame_volume(value)
-	ConfigWatcher.save()
+	var config = ConfigWatcher.get_audio_config()
+	config.set_ingame_volume(value)
 
 func _on_VoiceVolOptSlider_value_changed(value):
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Voice"),
 		value)
-	
 	ConfigWatcher.get_audio_config().set_voice_volume(value)
-	ConfigWatcher.save()
 
 func _on_DeviceOptionMenu_item_selected(index):
 	ConfigWatcher.get_audio_config().set_device(index)
-	ConfigWatcher.save()
 
 func _on_VoiceDeviceOptMenu_item_selected(index):
 	ConfigWatcher.get_audio_config().set_voice_device(index)
-	ConfigWatcher.save()
 
 func _on_BackOption_mouse_entered():
 	if option_selection == 0: return
@@ -157,69 +137,9 @@ func _on_BackOption_mouse_entered():
 func _on_BackOption_mouse_exited():
 	reset_opt_selection()
 
-func _on_InGameVolumeOption_mouse_entered():
-	if option_selection == 1: return
-	option_selection = 1
-	update_opt_selection()
-
-func _on_InGameVolumeOption_mouse_exited():
-	reset_opt_selection()
-
-func _on_VoiceVolumeOption_mouse_entered():
-	if option_selection == 2: return
-	option_selection = 2
-	update_opt_selection()
-
-func _on_VoiceVolumeOption_mouse_exited():
-	reset_opt_selection()
-
-func _on_DeviceOption_mouse_entered():
-	if option_selection == 3: return
-	option_selection = 3
-	update_opt_selection()
-
-func _on_DeviceOption_mouse_exited():
-	reset_opt_selection()
-
-func _on_VoiceDeviceOption_mouse_entered():
-	if option_selection == 4: return
-	option_selection = 4
-	update_opt_selection()
-
-func _on_VoiceDeviceOption_mouse_exited():
-	reset_opt_selection()
-
 func _on_BackOption_gui_input(event):
 	if event is InputEventMouseButton and event.is_pressed():
 		handle_opt_selection()
 	if event is InputEventScreenTouch and event.is_pressed():
 		option_selection = 0
-		handle_opt_selection()
-
-func _on_InGameVolumeOption_gui_input(event):
-	if event is InputEventMouseButton and event.is_pressed():
-		handle_opt_selection()
-	if event is InputEventScreenTouch and event.is_pressed():
-		option_selection = 1
-		handle_opt_selection()
-
-func _on_VoiceVolumeOption_gui_input(event):
-	if event is InputEventMouseButton and event.is_pressed():
-		handle_opt_selection()
-	if event is InputEventScreenTouch and event.is_pressed():
-		option_selection = 2
-		handle_opt_selection()
-
-func _on_DeviceOption_gui_input(event):
-	if event is InputEventMouseButton and event.is_pressed():
-		handle_opt_selection()
-	if event is InputEventScreenTouch and event.is_pressed():
-		option_selection = 3
-		handle_opt_selection()
-
-func _on_VoiceDeviceOption_gui_input(event):
-	if event is InputEventMouseButton and event.is_pressed():
-		handle_opt_selection()
-	if event is InputEventScreenTouch and event.is_pressed():
-		option_selection = 4
 		handle_opt_selection()

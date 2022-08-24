@@ -6,8 +6,8 @@ func _ready():
 	init_graphics_config()
 	
 	# warning-ignore:return_value_discarded 
-	# Switch to main menu scene
-	get_tree().change_scene("res://Scenes/Menu.tscn")
+	# Delay for 1 second then change to game menu
+	get_tree().change_scene("res://Scenes/DelayScene.tscn")
 
 func init_audio_config():
 	# Initialize sound based on saved configuration
@@ -28,6 +28,11 @@ func init_graphics_config():
 	var config = ConfigWatcher.get_graphics_config()
 	var size = config.get_window_size()
 	var is_fullscreen = config.get_display_mode() == 0
-	if not is_fullscreen: OS.set_window_size(size)
+	var is_maximized = config.is_maximized()
+	
 	OS.set_window_fullscreen(is_fullscreen)
-	OS.set_window_maximized(config.is_maximized())
+	OS.set_window_maximized(is_maximized)
+	
+	if not is_fullscreen and not is_maximized:
+		OS.set_window_size(size)
+		OS.center_window()

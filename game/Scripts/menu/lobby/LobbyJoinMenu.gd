@@ -18,12 +18,6 @@ func _ready():
 	# Set server address and port from saved configuration
 	ServerAddress.set_text(ConfigWatcher.get_lobby_config().get_remote_server_address())
 	ServerPort.set_text(ConfigWatcher.get_lobby_config().get_remote_server_port())
-	
-	# Connect network connection signals to related functions
-	# warning-ignore:return_value_discarded
-	get_tree().connect("connected_to_server", self, "_lobby_connection_success")
-	# warning-ignore:return_value_discarded
-	get_tree().connect("connection_failed", self, "_lobby_connection_fail")
 
 func _input(event):
 	if event is InputEventMouseButton or event is InputEventScreenTouch:
@@ -77,15 +71,21 @@ func handle_opt_selection():
 		var err = peer.create_client(ServerAddress.get_text(),
 			int(ServerPort.get_text()))
 		
-		if err == ERR_CANT_CREATE:
+		set_connecting(true)
+		
+		if err == OK:
+			# warning-ignore:return_value_discarded
+			get_tree().change_scene("res://Scenes/Map.tscn")
+			get_tree().set_network_peer(peer)
+			return
+		elif err == ERR_CANT_CREATE:
 			set_error("Cannot connect to lobby, there might be a server error.")
 			return
 		elif err == ERR_ALREADY_IN_USE:
 			set_error("You're already connected to this lobby, restarting the game may fix this issue.")
 			return
 		
-		set_connecting(true)
-		get_tree().set_network_peer(peer)
+		set_connecting(false)
 	elif option_selection == 1:
 		# warning-ignore:return_value_discarded
 		get_tree().change_scene("res://Scenes/menu/LobbyMenu.tscn")
@@ -127,25 +127,16 @@ func set_connecting(mode: bool):
 	
 	is_connecting = mode
 
-func _lobby_connection_success():
-	# warning-ignore:return_value_discarded
-	get_tree().change_scene("res://Scenes/maps/Tutorial.tscn")
-
-func _lobby_connection_fail():
-	set_connecting(false)
-	set_error("Failed to join lobby.")
-
 func _on_ServerAddress_text_changed(new_text):
 	if is_connecting: ServerAddress.delete_char_at_cursor()
 	ConfigWatcher.get_lobby_config().set_remote_server_address(new_text)
-	ConfigWatcher.save()
 
 func _on_ServerPort_text_changed(new_text):
 	if not new_text.is_valid_integer() or is_connecting:
 		ServerPort.delete_char_at_cursor()
 	
-	ConfigWatcher.get_lobby_config().set_remote_server_port(new_text)
-	ConfigWatcher.save()
+	var config = ConfigWatcher.get_lobby_config()
+	config.set_remote_server_port(new_text)
 
 func _on_ServerAddress_focus_entered():
 	is_typing = true

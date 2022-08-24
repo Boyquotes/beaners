@@ -19,23 +19,36 @@ func _ready():
 	init()
 
 func init():
+	# Initialize failsafe variables
+	var is_audio_failed = false
+	var is_graphics_failed = false
+	var is_lobby_failed = false
+	var is_player_failed = false
+	
 	# Initialize configurations
 	if get_audio_config().init(PATH_CONFIG) == OK:
 		print("Initialized Audio configuration watcher")
 	else:
+		is_audio_failed = true
 		printerr("Failed to init Audio configuration watcher")
 	if get_graphics_config().init(PATH_CONFIG) == OK:
 		print("Initialized Display configuration watcher")
 	else:
+		is_graphics_failed = true
 		printerr("Failed to init Display configuration watcher")
 	if get_lobby_config().init(PATH_CONFIG) == OK:
 		print("Initialized Lobby configuration watcher")
 	else:
+		is_lobby_failed = true
 		printerr("Failed to init Lobby configuration watcher")
 	if get_player_config().init(PATH_CONFIG) == OK:
 		print("Initialized Player configuration watcher")
 	else:
+		is_player_failed = true
 		printerr("Failed to init Player configuration watcher")
+	if is_audio_failed and is_graphics_failed and is_lobby_failed and is_player_failed:
+		print("You are currently receiving errors while reading configurations.")
+		print("This is normal if you are running the game for the first-time.")
 
 func save():
 	# Save configurations

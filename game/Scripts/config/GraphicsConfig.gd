@@ -58,7 +58,7 @@ func set_window_size(value: Vector2):
 
 func get_window_size(default = Vector2(1024.0, 600.0)) -> Vector2:
 	return Vector2(get_value(WINDOW_WIDTH, default.x),
-			get_value(WINDOW_HEIGHT, default.y))
+		get_value(WINDOW_HEIGHT, default.y))
 
 func set_value(key, value):
 	get_cfg().set_value("Graphics", key, value)

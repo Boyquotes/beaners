@@ -1,9 +1,11 @@
-# This script is the Simple Free-Look Camera
+# This script is the Simple Free-Look Camera with modified changes
 # View https://godotengine.org/asset-library/asset/701 for more details
 
 extends Camera
 
 export(float, 0.0, 1.0) var sensitivity = 0.25
+
+var locked = true
 
 # Mouse state
 var _mouse_position = Vector2(0.0, 0.0)
@@ -25,6 +27,10 @@ var _q = false
 var _e = false
 
 func _input(event):
+	# Do nothing if camera is locked
+	if is_locked():
+		return
+	
 	# Receives mouse motion
 	if event is InputEventMouseMotion:
 		_mouse_position = event.relative
@@ -60,8 +66,18 @@ func _process(delta):
 	_update_mouselook()
 	_update_movement(delta)
 
+func set_lock(toggle: bool):
+	locked = toggle
+
+func is_locked() -> bool:
+	return locked
+
 # Updates camera movement
 func _update_movement(delta):
+	# Do nothing if camera is locked
+	if is_locked():
+		return
+	
 	# Computes desired direction from key states
 	_direction = Vector3(_d as float - _a as float, 
 						 _e as float - _q as float,
@@ -86,6 +102,10 @@ func _update_movement(delta):
 
 # Updates mouse look 
 func _update_mouselook():
+	# Do nothing if camera is locked
+	if is_locked():
+		return
+	
 	# Only rotates mouse if the mouse is captured
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		_mouse_position *= sensitivity

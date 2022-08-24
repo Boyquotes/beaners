@@ -70,27 +70,22 @@ func handle_opt_selection():
 	if option_selection == -1:
 		option_selection = 0
 	if option_selection == 0:
-		var selection = MapSelection.get_selected()
 		var peer = NetworkedMultiplayerENet.new()
 		var player_limit = int(PlayerLimit.get_value())
 		
 		var err = peer.create_server(int(ServerPort.get_text()),
 			player_limit if player_limit > 0 else 4095)
 		
-		if err == ERR_CANT_CREATE:
+		if err == OK:
+			# warning-ignore:return_value_discarded
+			get_tree().change_scene("res://Scenes/Map.tscn")
+			get_tree().set_network_peer(peer)
+		elif err == ERR_CANT_CREATE:
 			UiSoundGlobals.Inaccessible.play()
 			set_error("Cannot create lobby.")
-			return
 		elif err == ERR_ALREADY_IN_USE:
 			UiSoundGlobals.Inaccessible.play()
 			set_error("Lobby currently in-use.")
-			return
-		
-		get_tree().set_network_peer(peer)
-		
-		if selection == 3:
-			# warning-ignore:return_value_discarded
-			get_tree().change_scene("res://Scenes/maps/Tutorial.tscn")
 	elif option_selection == 1:
 		# warning-ignore:return_value_discarded
 		get_tree().change_scene("res://Scenes/menu/LobbyMenu.tscn")
@@ -124,17 +119,16 @@ func _on_ServerPort_text_changed(new_text):
 	if not new_text.is_valid_integer():
 		ServerPort.delete_char_at_cursor()
 	
-	ConfigWatcher.get_lobby_config().set_host_server_port(new_text)
-	ConfigWatcher.save()
+	var config = ConfigWatcher.get_lobby_config()
+	config.set_host_server_port(new_text)
 
 func _on_PlayerLimit_value_changed(value):
 	PlayerLimitCount.set_text(String(value))
 	ConfigWatcher.get_lobby_config().set_host_player_limit(value)
-	ConfigWatcher.save()
 
 func _on_MapSelection_item_selected(index):
-	ConfigWatcher.get_lobby_config().set_host_map_selection(index)
-	ConfigWatcher.save()
+	var config = ConfigWatcher.get_lobby_config()
+	config.set_host_map_selection(index)
 
 func _on_ServerAddress_focus_entered():
 	is_typing = true

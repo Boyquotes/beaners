@@ -53,7 +53,7 @@ func handle_opt_selection():
 		# TODO: Implement help screen
 		print("TODO: Implement help screen")
 	elif option_selection == 3:
-		get_tree().quit()
+		AppWatcher.quit()
 
 func update_opt_selection():
 	# This function must be called after option_selection has changed

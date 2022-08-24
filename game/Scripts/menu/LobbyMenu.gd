@@ -52,7 +52,7 @@ func _process(_delta):
 		update_opt_selection()
 		
 	# Call handle_opt_selection for the accept input action
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("ui_accept") and not is_typing:
 		handle_opt_selection()
 	# Return to main menu for the cancel input action
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -97,8 +97,8 @@ func reset_opt_selection():
 	update_opt_selection()
 
 func _on_PlayerName_text_changed(new_text):
-	ConfigWatcher.get_player_config().set_player_name(new_text)
-	ConfigWatcher.save()
+	var config = ConfigWatcher.get_player_config()
+	config.set_player_name(new_text)
 
 func _on_JoinOption_mouse_entered():
 	if option_selection == 0: return

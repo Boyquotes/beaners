@@ -40,9 +40,6 @@ func _process(_delta):
 		handle_opt_selection()
 	# Return to main menu for the cancel input action
 	if Input.is_action_just_pressed("ui_cancel"):
-		if has_node("AudioConfigMenu") and is_ingame():
-			return
-		
 		option_selection = 2
 		handle_opt_selection()
 
@@ -62,6 +59,7 @@ func handle_opt_selection():
 		if is_paused:
 			var menu = preload("res://Scenes/menu/config/AudioConfigMenu.tscn").instance()
 			menu.set_ingame(is_paused)
+			set_process(false)
 			add_child(menu)
 			return
 		
@@ -71,6 +69,7 @@ func handle_opt_selection():
 		print("TODO: Implement video configuration screen")
 	elif option_selection == 2:
 		if is_paused:
+			get_parent().set_process(true)
 			get_parent().remove_child(self)
 			queue_free()
 			return

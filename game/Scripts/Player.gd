@@ -37,6 +37,7 @@ func _ready():
 		if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		
+		if Name.is_visible(): Name.set_visible(false)
 		if has_node("HUDOverlay"): add_child(HUDOverlay)
 		if not Camera.is_current(): Camera.make_current()
 

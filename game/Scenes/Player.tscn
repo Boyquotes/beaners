@@ -24,7 +24,6 @@ viewport_path = NodePath("Overlay/NameViewport")
 
 [node name="Player" type="KinematicBody"]
 pause_mode = 2
-collision_layer = 2
 script = ExtResource( 1 )
 
 [node name="PlayerCollision" type="CollisionShape" parent="."]

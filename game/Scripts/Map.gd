@@ -37,6 +37,7 @@ func _process(_delta):
 		if not DebugCamera.is_current():
 			for player in Players.get_children():
 				if not player.is_network_master(): continue
+				DebugCamera.set_translation(player.Camera.get_translation())
 				player.Camera.clear_current()
 				player.set_debug_cam(true)
 			

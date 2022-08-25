@@ -152,8 +152,8 @@ size_flags_vertical = 3
 custom_styles/slider = SubResource( 16 )
 custom_styles/grabber_area_highlight = SubResource( 21 )
 custom_styles/grabber_area = SubResource( 20 )
-max_value = 10.0
-step = 0.5
+max_value = 5.0
+step = 0.1
 
 [node name="VoiceVolumeOption" type="HBoxContainer" parent="Root/MarginContents/Contents"]
 margin_top = 143.0
@@ -181,8 +181,8 @@ size_flags_vertical = 3
 custom_styles/slider = SubResource( 15 )
 custom_styles/grabber_area_highlight = SubResource( 22 )
 custom_styles/grabber_area = SubResource( 22 )
-max_value = 10.0
-step = 0.5
+max_value = 5.0
+step = 0.1
 
 [node name="OtherSubheader" type="Label" parent="Root/MarginContents/Contents"]
 margin_top = 182.0
@@ -191,10 +191,32 @@ margin_bottom = 230.0
 custom_fonts/font = SubResource( 8 )
 text = "Other"
 
-[node name="DeviceOption" type="HBoxContainer" parent="Root/MarginContents/Contents"]
+[node name="MuteOption" type="HBoxContainer" parent="Root/MarginContents/Contents"]
 margin_top = 234.0
 margin_right = 960.0
 margin_bottom = 269.0
+
+[node name="MuteOptionLabel" type="Label" parent="Root/MarginContents/Contents/MuteOption"]
+margin_right = 48.0
+margin_bottom = 35.0
+custom_fonts/font = SubResource( 6 )
+text = "Mute"
+
+[node name="Spacer" type="Control" parent="Root/MarginContents/Contents/MuteOption"]
+margin_left = 52.0
+margin_right = 932.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+
+[node name="MuteOptionBox" type="CheckBox" parent="Root/MarginContents/Contents/MuteOption"]
+margin_left = 936.0
+margin_right = 960.0
+margin_bottom = 35.0
+
+[node name="DeviceOption" type="HBoxContainer" parent="Root/MarginContents/Contents"]
+margin_top = 273.0
+margin_right = 960.0
+margin_bottom = 308.0
 
 [node name="DeviceOptionLabel" type="Label" parent="Root/MarginContents/Contents/DeviceOption"]
 margin_right = 204.0
@@ -222,9 +244,9 @@ custom_styles/normal = SubResource( 19 )
 align = 1
 
 [node name="VoiceDeviceOption" type="HBoxContainer" parent="Root/MarginContents/Contents"]
-margin_top = 273.0
+margin_top = 312.0
 margin_right = 960.0
-margin_bottom = 308.0
+margin_bottom = 347.0
 
 [node name="VoiceDeviceOptLabel" type="Label" parent="Root/MarginContents/Contents/VoiceDeviceOption"]
 margin_right = 204.0
@@ -257,5 +279,6 @@ align = 1
 [connection signal="drag_ended" from="Root/MarginContents/Contents/InGameVolumeOption/InGameVolOptSlider" to="." method="_on_InGameVolOptSlider_drag_ended"]
 [connection signal="value_changed" from="Root/MarginContents/Contents/InGameVolumeOption/InGameVolOptSlider" to="." method="_on_InGameVolOptSlider_value_changed"]
 [connection signal="value_changed" from="Root/MarginContents/Contents/VoiceVolumeOption/VoiceVolOptSlider" to="." method="_on_VoiceVolOptSlider_value_changed"]
+[connection signal="toggled" from="Root/MarginContents/Contents/MuteOption/MuteOptionBox" to="." method="_on_MuteOptionBox_toggled"]
 [connection signal="item_selected" from="Root/MarginContents/Contents/DeviceOption/DeviceOptionMenu" to="." method="_on_DeviceOptionMenu_item_selected"]
 [connection signal="item_selected" from="Root/MarginContents/Contents/VoiceDeviceOption/VoiceDeviceOptMenu" to="." method="_on_VoiceDeviceOptMenu_item_selected"]

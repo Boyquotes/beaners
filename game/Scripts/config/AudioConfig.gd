@@ -4,6 +4,7 @@ var cfg = ConfigFile.new()
 
 const INGAME_VOLUME = "ingame-volume"
 const VOICE_VOLUME = "voice-volume"
+const MUTE = "mute"
 const DEVICE = "device"
 const VOICE_DEVICE = "voice-device"
 
@@ -33,6 +34,12 @@ func set_voice_volume(db: float):
 
 func get_voice_volume(default = 5.0) -> float:
 	return get_value(VOICE_VOLUME, default)
+
+func set_mute(toggle: bool):
+	set_value(MUTE, toggle)
+
+func is_muted(default = false) -> bool:
+	return get_value(MUTE, default)
 
 func set_device(index: int):
 	set_value(DEVICE, index)

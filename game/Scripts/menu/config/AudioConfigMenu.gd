@@ -15,6 +15,10 @@ onready var VoiceVolumeOption = $"Root/MarginContents/Contents/VoiceVolumeOption
 onready var VoiceVolOptLabel = $"Root/MarginContents/Contents/VoiceVolumeOption/VoiceVolOptLabel"
 onready var VoiceVolOptSlider = $"Root/MarginContents/Contents/VoiceVolumeOption/VoiceVolOptSlider"
 
+onready var MuteOption = $"Root/MarginContents/Contents/MuteOption"
+onready var MuteOptionLabel = $"Root/MarginContents/Contents/MuteOption/MuteOptionLabel"
+onready var MuteOptionBox = $"Root/MarginContents/Contents/MuteOption/MuteOptionBox"
+
 onready var DeviceOption = $"Root/MarginContents/Contents/DeviceOption"
 onready var DeviceOptionLabel = $"Root/MarginContents/Contents/DeviceOption/DeviceOptionLabel"
 onready var DeviceOptionMenu = $"Root/MarginContents/Contents/DeviceOption/DeviceOptionMenu"
@@ -35,6 +39,7 @@ func _ready():
 	# Set volume sliders and menu indexes from saved audio configuration
 	InGameVolOptSlider.set_value(ConfigWatcher.get_audio_config().get_ingame_volume())
 	VoiceVolOptSlider.set_value(ConfigWatcher.get_audio_config().get_voice_volume())
+	MuteOptionBox.set_pressed(ConfigWatcher.get_audio_config().is_muted())
 	DeviceOptionMenu.select(ConfigWatcher.get_audio_config().get_device())
 	VoiceDeviceOptMenu.select(ConfigWatcher.get_audio_config().get_voice_device())
 
@@ -121,7 +126,20 @@ func _on_InGameVolOptSlider_value_changed(value):
 func _on_VoiceVolOptSlider_value_changed(value):
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Voice"),
 		value)
+	
 	ConfigWatcher.get_audio_config().set_voice_volume(value)
+
+func _on_MuteOptionBox_toggled(pressed):
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("In-Game"),
+		pressed)
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("Voice"),
+		pressed)
+	
+	if UiSoundGlobals.Select.is_playing():
+		UiSoundGlobals.Select.stop()
+	
+	UiSoundGlobals.Select.play()
+	ConfigWatcher.get_audio_config().set_mute(pressed)
 
 func _on_DeviceOptionMenu_item_selected(index):
 	ConfigWatcher.get_audio_config().set_device(index)

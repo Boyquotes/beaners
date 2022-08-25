@@ -9,6 +9,8 @@ var speed = 7
 var gravity = 9.8
 var jump = 5
 
+var push = 100
+
 var cam_accel = 40
 var mouse_sense = 0.1
 var snap

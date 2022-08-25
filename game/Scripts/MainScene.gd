@@ -15,10 +15,16 @@ func init_audio_config():
 	var devices = AudioServer.get_device_list()
 	var voice_devices = AudioServer.capture_get_device_list()
 	
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("In-Game"),
+	var ingame_bus = AudioServer.get_bus_index("In-Game")
+	var voice_bus = AudioServer.get_bus_index("Voice")
+	
+	AudioServer.set_bus_volume_db(ingame_bus,
 		config.get_ingame_volume())
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Voice"),
+	AudioServer.set_bus_volume_db(voice_bus,
 		config.get_voice_volume())
+	
+	AudioServer.set_bus_mute(ingame_bus, config.is_muted())
+	AudioServer.set_bus_mute(voice_bus, config.is_muted())
 	
 	AudioServer.set_device(devices[config.get_device()])
 	AudioServer.capture_set_device(voice_devices[config.get_voice_device()])

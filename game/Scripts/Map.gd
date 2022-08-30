@@ -90,7 +90,9 @@ remote func chat_blind(msg):
 	Logs.msg(msg)
 
 remote func load_map(index):
-	if index == 3:
+	if index == 1:
+		add_child(load("res://Scenes/maps/Holmes.tscn").instance())
+	elif index == 3:
 		add_child(load("res://Scenes/maps/Tutorial.tscn").instance())
 	if DebugCamera.is_locked():
 		DebugCamera.set_lock(false)

@@ -28,7 +28,7 @@ var _e = false
 
 func _input(event):
 	# Do nothing if camera is locked
-	if is_locked():
+	if is_locked() or not is_current():
 		return
 	
 	# Receives mouse motion
@@ -75,7 +75,7 @@ func is_locked() -> bool:
 # Updates camera movement
 func _update_movement(delta):
 	# Do nothing if camera is locked
-	if is_locked():
+	if is_locked() or not is_current():
 		return
 	
 	# Computes desired direction from key states
@@ -103,7 +103,7 @@ func _update_movement(delta):
 # Updates mouse look 
 func _update_mouselook():
 	# Do nothing if camera is locked
-	if is_locked():
+	if is_locked() or not is_current():
 		return
 	
 	# Only rotates mouse if the mouse is captured

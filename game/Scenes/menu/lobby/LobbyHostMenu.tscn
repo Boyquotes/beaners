@@ -234,8 +234,10 @@ custom_styles/pressed = SubResource( 26 )
 custom_styles/focus = SubResource( 27 )
 custom_styles/disabled = SubResource( 25 )
 custom_styles/normal = SubResource( 19 )
-text = "None"
+text = "Heaven"
 align = 1
+items = [ "Heaven", null, false, 0, null, "Forest", null, false, 1, null, "Beach", null, false, 2, null, "Tutorial", null, false, 3, null ]
+selected = 0
 
 [node name="Error" type="Label" parent="Root/Contents"]
 visible = false

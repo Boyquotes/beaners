@@ -1,5 +1,7 @@
 extends Spatial
 
+var has_map_loaded = false
+
 onready var DisconnectedDialog = $"Dialogs/DisconnectedDialog"
 onready var FailureConnectionDialog = $"Dialogs/FailureConnectionDialog"
 
@@ -45,6 +47,8 @@ func _process(_delta):
 		else:
 			DebugCamera.clear_current()
 			
+			if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
+				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			for player in Players.get_children():
 				if not player.is_network_master(): continue
 				player.Camera.make_current()
@@ -90,12 +94,17 @@ remote func chat_blind(msg):
 	Logs.msg(msg)
 
 remote func load_map(index):
+	if has_map_loaded:
+		# Should not reload when a map is already loaded
+		return
 	if index == 1:
-		add_child(load("res://Scenes/maps/Holmes.tscn").instance())
+		add_child(load("res://Scenes/maps/Forest.tscn").instance())
 	elif index == 3:
 		add_child(load("res://Scenes/maps/Tutorial.tscn").instance())
 	if DebugCamera.is_locked():
 		DebugCamera.set_lock(false)
+	
+	has_map_loaded = true
 
 func _player_connected(id):
 	var map_selection = ConfigWatcher.get_lobby_config().get_host_map_selection()

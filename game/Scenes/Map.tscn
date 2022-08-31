@@ -39,6 +39,7 @@ dialog_text = "Failed to connect to the lobby."
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 
 [node name="DebugCamera" type="Camera" parent="."]
+far = 1024.0
 script = ExtResource( 3 )
 
 [node name="Logs" parent="." instance=ExtResource( 2 )]

@@ -13,10 +13,10 @@ script = ExtResource( 3 )
 mode = 0
 textures = [ [ ExtResource( 1 ), ExtResource( 5 ) ], [ ExtResource( 1 ), ExtResource( 5 ) ] ]
 
-[node name="Holmes" type="Spatial"]
+[node name="Forest" type="Spatial"]
 
 [node name="Sun" type="DirectionalLight" parent="."]
-transform = Transform( -0.525198, 0.845942, 0.0924633, 0.0766475, -0.0611891, 0.995179, 0.847521, 0.529753, -0.032703, 0.0288553, -0.0795765, -0.0937672 )
+transform = Transform( -0.525198, 0.845942, 0.0924633, 0.0766475, -0.0611891, 0.995179, 0.847521, 0.529753, -0.0327029, 0.0288553, -0.0795765, -0.0937672 )
 shadow_enabled = true
 directional_shadow_mode = 0
 
@@ -41,6 +41,7 @@ shader_params/u_tile_reduction = Plane( 0, 0, 0, 0 )
 
 [node name="TreeScatter" type="Spatial" parent="."]
 script = ExtResource( 6 )
+_scenes = [ ExtResource( 7 ) ]
 
 [node name="Tree" parent="TreeScatter" instance=ExtResource( 7 )]
 transform = Transform( -0.270659, 0, -0.962675, 0, 1, 0, 0.962675, 0, -0.270659, 16.1477, 0, 13.0448 )
@@ -467,9 +468,6 @@ transform = Transform( -0.254962, 0, 0.966951, 0, 1, 0, -0.966951, 0, -0.254962,
 
 [node name="Tree149" parent="TreeScatter" instance=ExtResource( 7 )]
 transform = Transform( 0.264529, 0, -0.964378, 0, 1, 0, 0.964378, 0, 0.264529, 7.95985, 1.90735e-06, -11.2009 )
-
-[node name="Tree150" parent="TreeScatter" instance=ExtResource( 7 )]
-transform = Transform( -0.739838, 0, 0.672785, 0, 1, 0, -0.672785, 0, -0.739838, 3.7796, -1.90735e-06, -6.49114 )
 
 [node name="Tree151" parent="TreeScatter" instance=ExtResource( 7 )]
 transform = Transform( -0.931293, 0, -0.364271, 0, 1, 0, 0.364271, 0, -0.931293, 2.79333, 0, -23.287 )
@@ -1003,10 +1001,7 @@ transform = Transform( -0.98638, 0, 0.164485, 0, 1, 0, -0.164485, 0, -0.98638, 6
 transform = Transform( 0.50039, 0, -0.8658, 0, 1, 0, 0.8658, 0, 0.50039, 93.0988, 0, 53.2263 )
 
 [node name="Tree332" parent="TreeScatter" instance=ExtResource( 7 )]
-transform = Transform( -0.261229, 0, -0.965277, 0, 1, 0, 0.965277, 0, -0.261229, 99.4266, 0.754224, 92.0818 )
-
-[node name="Tree333" parent="TreeScatter" instance=ExtResource( 7 )]
-transform = Transform( -0.278027, 0, 0.960573, 0, 1, 0, -0.960573, 0, -0.278027, 106.886, 2.24093, 92.9001 )
+transform = Transform( -0.261229, 0, -0.965277, 0, 1, 0, 0.965277, 0, -0.261229, 99.4266, 0.0266017, 92.0818 )
 
 [node name="Tree334" parent="TreeScatter" instance=ExtResource( 7 )]
 transform = Transform( 0.957331, 0, -0.288995, 0, 1, 0, 0.288995, 0, 0.957331, 71.1222, -1.52588e-05, 75.2257 )
@@ -1057,7 +1052,7 @@ transform = Transform( 0.98816, 0, -0.153425, 0, 1, 0, 0.153425, 0, 0.98816, 60.
 transform = Transform( -0.228316, 0, 0.973587, 0, 1, 0, -0.973587, 0, -0.228316, 100.48, -1.52588e-05, 78.6643 )
 
 [node name="Tree350" parent="TreeScatter" instance=ExtResource( 7 )]
-transform = Transform( 0.488295, 0, 0.872679, 0, 1, 0, -0.872679, 0, 0.488295, 105.513, 1.66523, 78.3835 )
+transform = Transform( 0.488295, 0, 0.872679, 0, 1, 0, -0.872679, 0, 0.488295, 105.513, 0.300766, 78.3835 )
 
 [node name="Tree352" parent="TreeScatter" instance=ExtResource( 7 )]
 transform = Transform( -0.984073, 0, 0.177765, 0, 1, 0, -0.177765, 0, -0.984073, 100.473, 0, 73.9328 )
@@ -1123,7 +1118,7 @@ transform = Transform( 0.495346, 0, -0.868696, 0, 1, 0, 0.868696, 0, 0.495346, 3
 transform = Transform( 0.135703, 0, -0.99075, 0, 1, 0, 0.99075, 0, 0.135703, 36.0022, 0, -146.041 )
 
 [node name="Tree367" parent="TreeScatter" instance=ExtResource( 7 )]
-transform = Transform( -0.177759, 0, 0.984074, 0, 1, 0, -0.984074, 0, -0.177759, -17.4644, -7.62939e-06, -112.311 )
+transform = Transform( -0.177759, 0, 0.984074, 0, 1, 0, -0.984074, 0, -0.177759, 2.22248, -7.62939e-06, -112.311 )
 
 [node name="Tree368" parent="TreeScatter" instance=ExtResource( 7 )]
 transform = Transform( 0.532502, 0, 0.846429, 0, 1, 0, -0.846429, 0, 0.532502, -1.13877, -7.62939e-06, -118.929 )
@@ -1262,3 +1257,204 @@ transform = Transform( 0.699613, 0, -0.714522, 0, 1, 0, 0.714522, 0, 0.699613, 3
 
 [node name="Tree412" parent="TreeScatter" instance=ExtResource( 7 )]
 transform = Transform( -0.416978, 0, -0.908916, 0, 1, 0, 0.908916, 0, -0.416978, 32.5549, -7.62939e-06, -139.172 )
+
+[node name="Tree150" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.973388, 0, -0.229162, 0, 1, 0, 0.229162, 0, 0.973388, 29.5412, 0, 23.3029 )
+
+[node name="Tree182" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.809595, 0, -0.586988, 0, 1, 0, 0.586988, 0, -0.809595, 48.4279, -3.8147e-06, 34.5428 )
+
+[node name="Tree273" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.607312, 0, -0.794463, 0, 1, 0, 0.794463, 0, 0.607312, 36.5667, -3.8147e-06, 66.6205 )
+
+[node name="Tree291" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.246905, 0, -0.96904, 0, 1, 0, 0.96904, 0, -0.246905, 24.1197, 0.000431061, 103.568 )
+
+[node name="Tree294" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.017111, 0, -0.999854, 0, 1, 0, 0.999854, 0, -0.017111, 16.8763, -3.8147e-06, 43.4134 )
+
+[node name="Tree365" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.622615, 0, 0.782528, 0, 1, 0, -0.782528, 0, -0.622615, 35.8783, 0, 15.2 )
+
+[node name="Tree413" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.0272369, 0, -0.999629, 0, 1, 0, 0.999629, 0, 0.0272369, 70.8638, 0, 2.77047 )
+
+[node name="Tree414" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.446007, 0, 0.895029, 0, 1, 0, -0.895029, 0, -0.446007, 94.8542, 5.72205e-06, -49.1391 )
+
+[node name="Tree415" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.30433, 0, -0.952567, 0, 1, 0, 0.952567, 0, -0.30433, 84.9177, -4.76837e-06, -93.2896 )
+
+[node name="Tree416" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.99772, 0, 0.0674865, 0, 1, 0, -0.0674865, 0, 0.99772, 68.4776, 3.90406, -134.499 )
+
+[node name="Tree417" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.939236, 0, -0.343273, 0, 1, 0, 0.343273, 0, -0.939236, 65.5571, 1.90735e-06, -100.132 )
+
+[node name="Tree418" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.789329, 0, -0.613971, 0, 1, 0, 0.613971, 0, 0.789329, 68.2029, 0, -16.922 )
+
+[node name="Tree419" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.833534, 0, 0.552468, 0, 1, 0, -0.552468, 0, -0.833534, 69.5872, -3.8147e-06, 7.37141 )
+
+[node name="Tree420" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.59469, 0, -0.803955, 0, 1, 0, 0.803955, 0, 0.59469, 78.0029, 0, -33.7749 )
+
+[node name="Tree421" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.752032, 0, -0.659127, 0, 1, 0, 0.659127, 0, 0.752032, 79.7399, 3.8147e-06, 5.0447 )
+
+[node name="Tree422" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.864457, 0, -0.502706, 0, 1, 0, 0.502706, 0, -0.864457, 69.1336, -3.8147e-06, 36.7082 )
+
+[node name="Tree423" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.999337, 0, 0.0364097, 0, 1, 0, -0.0364097, 0, 0.999337, 59.3118, 7.62939e-06, 57.897 )
+
+[node name="Tree424" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.96863, 0, 0.248509, 0, 1, 0, -0.248509, 0, -0.96863, 64.5439, 0, 82.4287 )
+
+[node name="Tree425" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.919475, 0, 0.393148, 0, 1, 0, -0.393148, 0, 0.919475, 67.4488, 0, 94.0054 )
+
+[node name="Tree426" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.666362, 0, -0.745629, 0, 1, 0, 0.745629, 0, 0.666362, 29.2203, 4.29153e-06, -120.783 )
+
+[node name="Tree427" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.870681, 0, -0.491848, 0, 1, 0, 0.491848, 0, 0.870681, 34.0539, 0, -73.4084 )
+
+[node name="Tree428" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.955906, 0, -0.293674, 0, 1, 0, 0.293674, 0, 0.955906, 47.327, 3.8147e-06, -14.3021 )
+
+[node name="Tree429" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.752737, 0, -0.658322, 0, 1, 0, 0.658322, 0, -0.752737, 58.4247, 0, 36.6929 )
+
+[node name="Tree430" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.852905, 0, -0.522066, 0, 1, 0, 0.522066, 0, -0.852905, 60.8634, 7.62939e-06, 50.9987 )
+
+[node name="Tree431" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.786039, 0, 0.618177, 0, 1, 0, -0.618177, 0, 0.786039, 66.0833, 0, -2.47067 )
+
+[node name="Tree432" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.453657, 0, 0.891176, 0, 1, 0, -0.891176, 0, 0.453657, 73.57, -1.90735e-06, -53.0232 )
+
+[node name="Tree433" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.909419, 0, 0.415882, 0, 1, 0, -0.415882, 0, 0.909419, 85.7879, 3.8147e-06, -83.241 )
+
+[node name="Tree434" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.999343, 0, -0.0362552, 0, 1, 0, 0.0362552, 0, -0.999343, 63.756, -3.8147e-06, 30.6016 )
+
+[node name="Tree435" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.831066, 0, -0.556173, 0, 1, 0, 0.556173, 0, -0.831066, 47.7025, 7.62939e-06, 23.1108 )
+
+[node name="Tree436" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.765714, 0, -0.643181, 0, 1, 0, 0.643181, 0, 0.765714, 41.3179, -7.62939e-06, -7.90062 )
+
+[node name="Tree437" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.314478, 0, -0.949265, 0, 1, 0, 0.949265, 0, -0.314478, 44.1368, -7.62939e-06, 11.821 )
+
+[node name="Tree438" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.155553, 0, 0.987827, 0, 1, 0, -0.987827, 0, -0.155553, 78.0691, -3.8147e-06, -19.1333 )
+
+[node name="Tree439" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.371711, 0, -0.928348, 0, 1, 0, 0.928348, 0, -0.371711, 85.844, -3.8147e-06, -23.9318 )
+
+[node name="Tree440" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.999964, 0, 0.00850215, 0, 1, 0, -0.00850215, 0, 0.999964, 95.3491, 3.8147e-06, -13.1343 )
+
+[node name="Tree441" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.877565, 0, 0.479458, 0, 1, 0, -0.479458, 0, -0.877565, 108.319, 3.8147e-06, 0.730215 )
+
+[node name="Tree442" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.939397, 0, 0.342832, 0, 1, 0, -0.342832, 0, 0.939397, 100.228, 3.8147e-06, 8.05803 )
+
+[node name="Tree443" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.804099, 0, 0.594496, 0, 1, 0, -0.594496, 0, 0.804099, 84.0167, 7.62939e-06, 10.3884 )
+
+[node name="Tree444" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.144385, 0, 0.989522, 0, 1, 0, -0.989522, 0, 0.144385, 65.566, 0, -10.6509 )
+
+[node name="Tree445" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.535003, 0, 0.84485, 0, 1, 0, -0.84485, 0, -0.535003, 69.5254, 3.8147e-06, -8.79619 )
+
+[node name="Tree446" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.541148, 0, 0.840928, 0, 1, 0, -0.840928, 0, -0.541148, 74.7602, -7.62939e-06, -4.30823 )
+
+[node name="Tree447" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.999998, 0, 0.00203672, 0, 1, 0, -0.00203672, 0, -0.999998, 88.5583, 0, -8.83846 )
+
+[node name="Tree448" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.321799, 0, -0.946808, 0, 1, 0, 0.946808, 0, 0.321799, 89.5299, -3.8147e-06, 25.0754 )
+
+[node name="Tree449" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.366857, 0, -0.930277, 0, 1, 0, 0.930277, 0, -0.366857, 77.2341, 3.8147e-06, 45.0251 )
+
+[node name="Tree450" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.954938, 0, 0.296807, 0, 1, 0, -0.296807, 0, -0.954938, 73.4501, -3.8147e-06, 42.0885 )
+
+[node name="Tree451" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.340776, 0, -0.940144, 0, 1, 0, 0.940144, 0, 0.340776, 46.8365, -7.62939e-06, 15.8059 )
+
+[node name="Tree452" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.490242, 0, -0.871586, 0, 1, 0, 0.871586, 0, -0.490242, 41.6878, -3.8147e-06, 1.51323 )
+
+[node name="Tree453" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.294387, 0, -0.955686, 0, 1, 0, 0.955686, 0, -0.294387, 38.8712, 5.72205e-06, -50.0185 )
+
+[node name="Tree454" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.0291482, 0, -0.999575, 0, 1, 0, 0.999575, 0, 0.0291482, 38.861, -1.90735e-06, -93.5614 )
+
+[node name="Tree455" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.952855, 0, -0.303425, 0, 1, 0, 0.303425, 0, 0.952855, 43.8153, 5.72205e-06, -96.9685 )
+
+[node name="Tree456" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.143801, 0, -0.989607, 0, 1, 0, 0.989607, 0, 0.143801, 80.7308, 7.62939e-06, -43.04 )
+
+[node name="Tree457" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.471929, 0, 0.881637, 0, 1, 0, -0.881637, 0, -0.471929, 87.5974, 3.8147e-06, -16.9082 )
+
+[node name="Tree458" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.85532, 0, -0.518101, 0, 1, 0, 0.518101, 0, -0.85532, 89.8595, 0, 1.77308 )
+
+[node name="Tree459" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.583217, 0, 0.812316, 0, 1, 0, -0.812316, 0, 0.583217, 85.6927, 0, 21.8351 )
+
+[node name="Tree460" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.789056, 0, -0.614321, 0, 1, 0, 0.614321, 0, -0.789056, 77.1772, 0, -12.3893 )
+
+[node name="Tree461" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.978918, 0, 0.204254, 0, 1, 0, -0.204254, 0, -0.978918, 69.2848, 3.8147e-06, -34.3226 )
+
+[node name="Tree462" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.913529, 0, -0.406775, 0, 1, 0, 0.406775, 0, -0.913529, 49.4467, 3.8147e-06, -42.1099 )
+
+[node name="Tree463" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.896948, 0, 0.442137, 0, 1, 0, -0.442137, 0, -0.896948, 51.511, 7.62939e-06, 64.3113 )
+
+[node name="Tree464" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.796981, 0, 0.604004, 0, 1, 0, -0.604004, 0, 0.796981, 33.0433, 0.000106812, 85.4344 )
+
+[node name="Tree465" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.999459, 0, 0.032896, 0, 1, 0, -0.032896, 0, -0.999459, 24.5561, 0.000816345, 89.7633 )
+
+[node name="Tree466" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.418969, 0, -0.908001, 0, 1, 0, 0.908001, 0, -0.418969, 14.0167, 0, 59.8589 )
+
+[node name="Tree467" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.0711493, 0, 0.997466, 0, 1, 0, -0.997466, 0, 0.0711493, 38.205, 7.62939e-06, 38.9202 )
+
+[node name="Tree468" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.121034, 0, 0.992648, 0, 1, 0, -0.992648, 0, -0.121034, 55.3946, 3.8147e-06, 30.6371 )
+
+[node name="Tree469" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.984016, 0, 0.178079, 0, 1, 0, -0.178079, 0, -0.984016, 80.1563, 0, 68.1969 )
+
+[node name="Tree470" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( -0.728793, 0, -0.684734, 0, 1, 0, 0.684734, 0, -0.728793, 95.1302, 0.386482, 96.3392 )
+
+[node name="Tree474" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.995226, 0, -0.0975957, 0, 1, 0, 0.0975957, 0, 0.995226, 91.1778, 0, 78.572 )
+
+[node name="Tree475" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.327976, 0, 0.944686, 0, 1, 0, -0.944686, 0, 0.327976, 86.7281, 0, 62.48 )
+
+[node name="Tree476" type="StaticBody" parent="TreeScatter" instance=ExtResource( 7 )]
+transform = Transform( 0.715922, 0, 0.69818, 0, 1, 0, -0.69818, 0, 0.715922, 85.0436, -7.62939e-06, 53.0166 )

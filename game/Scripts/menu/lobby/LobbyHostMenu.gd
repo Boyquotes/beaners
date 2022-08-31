@@ -16,12 +16,6 @@ onready var BackOption = $"Root/Contents/OptionsContent/BackOption"
 export var option_selection = -1
 
 func _ready():
-	# Initialize MapSelection's items
-	MapSelection.add_item("Heaven", 0)
-	MapSelection.add_item("Grassy Holmes", 1)
-	MapSelection.add_item("Waterland", 2)
-	MapSelection.add_item("Tutorial", 3)
-	
 	# Set map selection, player limit, and port from saved configuration
 	ServerPort.set_text(ConfigWatcher.get_lobby_config().get_host_server_port())
 	PlayerLimit.set_value(ConfigWatcher.get_lobby_config().get_host_player_limit())

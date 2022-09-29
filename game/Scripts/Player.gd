@@ -37,7 +37,6 @@ func _ready():
 		if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		
-		if Name.is_visible(): Name.set_visible(false)
 		if has_node("HUDOverlay"): add_child(HUDOverlay)
 		if not Camera.is_current(): Camera.make_current()
 
@@ -108,7 +107,7 @@ func _physics_process(delta):
 	movement = velocity + gravity_vec
 	
 	# warning-ignore:return_value_discarded
-	move_and_slide_with_snap(movement, snap, Vector3.UP)
+	move_and_slide_with_snap(movement, snap, Vector3.UP, true, 4, deg2rad(52))
 	rpc("update_player", get_translation())
 
 puppet func update_player(translation: Vector3):

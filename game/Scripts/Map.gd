@@ -60,6 +60,7 @@ func _physics_process(_delta):
 			continue
 		
 		player.set_translation(Vector3(0, 10, 0))
+		player.reset_physics_interpolation()
 
 func create_player(id: int):
 	var player = preload("res://Scenes/Player.tscn").instance()

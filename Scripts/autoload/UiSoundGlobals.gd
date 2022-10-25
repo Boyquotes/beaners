@@ -8,10 +8,7 @@ const INACCESSIBLE_PATH = "res://Assets/sfx/ui-inaccessible.wav"
 const NAVIGATE_PATH = "res://Assets/sfx/ui-navigate.wav"
 const SELECT_PATH = "res://Assets/sfx/ui-select.wav"
 
-const UI_BUS = "In-Game"
-
-func _init():
-	print("Initialized UI Sound Globals")
+const SFX_BUS = "In-Game"
 
 func _ready():
 	# Initialize sound effects
@@ -23,9 +20,9 @@ func _ready():
 	Navigate.set_stream(load(NAVIGATE_PATH))
 	Select.set_stream(load(SELECT_PATH))
 	
-	Inaccessible.set_bus(UI_BUS)
-	Navigate.set_bus(UI_BUS)
-	Select.set_bus(UI_BUS)
+	Inaccessible.set_bus(SFX_BUS)
+	Navigate.set_bus(SFX_BUS)
+	Select.set_bus(SFX_BUS)
 	
 	# Reduce volume for Select and Navigate sound effects
 	Navigate.set_volume_db(-15.0)

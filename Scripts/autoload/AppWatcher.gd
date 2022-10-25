@@ -1,5 +1,8 @@
 extends Node
 
+const CONFIG_PATH = "user://game.cfg"
+const SETTINGS_PATH = "user://settings.godot"
+
 func _ready():
 	get_tree().set_auto_accept_quit(false)
 	print("Initialized Application watcher")

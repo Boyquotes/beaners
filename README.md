@@ -1,6 +1,9 @@
 # Beaners
 A game made in Godot Engine where you play as beans with your friends!
 
+## Note
+**This project has been halted. If you want to continue working on it, fork it.**
+
 ## To-Do
 - Multiplayer (50%)
 - Interactable Objects (0%)

@@ -35,7 +35,7 @@ export var option_selection = -1
 
 func _ready():
 	# Set sliders and menu indexes from saved video configuration
-	ModeOptionMenu.select(ConfigWatcher.get_video_config().get_display_mode())
+	ModeOptionMenu.select()
 	VsyncOptionBox.set_pressed(ConfigWatcher.get_video_config().is_display_vsync_enabled())
 	ShadowsOptionMenu.select(ConfigWatcher.get_video_config().get_shadow_quality())
 	TexturesOptionMenu.select(ConfigWatcher.get_video_config().get_texture_quality())

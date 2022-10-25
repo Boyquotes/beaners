@@ -1,8 +1,5 @@
 extends Node
 
-func _init():
-	print("Initialized Window watcher")
-
 func _ready():
 	# Attach _size_changed to root's size_changed signal
 	# warning-ignore:return_value_discarded
@@ -10,14 +7,17 @@ func _ready():
 
 func _size_changed():
 	# This function is called when root's size_changed is emitted
-	# and will save the modified window size
-	var config = ConfigWatcher.get_video_config()
-	var scale = config.get_ui_scale()
-	var root = get_tree().get_root()
+	# It saves the current window properties to the settings file
+	ProjectSettings.set_setting("display/window/size/width",
+		OS.get_window_size()[0])
+	ProjectSettings.set_setting("display/window/size/height",
+		OS.get_window_size()[1])
+	ProjectSettings.set_setting("display/window/size/borderless",
+		OS.get_borderless_window())
+	ProjectSettings.set_setting("display/window/size/fullscreen",
+		OS.is_window_fullscreen())
 	
-	config.set_window_maximize(OS.is_window_maximized())
-	config.set_window_size(root.get_size())
-	
-	# Also update the UI scale
-	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D,
-		SceneTree.STRETCH_ASPECT_EXPAND, root.get_size(), scale)
+	# Delay saving window properties to game settings
+	yield(get_tree().create_timer(1), "timeout")
+	# warning-ignore:return_value_discarded
+	ProjectSettings.save_custom(AppWatcher.SETTINGS_PATH)

@@ -14,7 +14,7 @@ config/name="Beaners"
 run/main_scene="res://Scenes/MainScene.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="beaners"
-config/project_settings_override="user://settings.cfg"
+config/project_settings_override="user://settings.godot"
 boot_splash/image="res://Assets/splash.png"
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://icon.png"
@@ -26,8 +26,8 @@ enable_audio_input=true
 [autoload]
 
 AppWatcher="*res://Scripts/autoload/AppWatcher.gd"
-WindowWatcher="*res://Scripts/autoload/WindowWatcher.gd"
 ConfigWatcher="*res://Scripts/autoload/ConfigWatcher.gd"
+WindowWatcher="*res://Scripts/autoload/WindowWatcher.gd"
 UiSoundGlobals="*res://Scripts/autoload/UiSoundGlobals.gd"
 
 [display]

@@ -9,4 +9,4 @@ data_*/
 
 # Engine import ignores
 *.import
-game/.import
+.import

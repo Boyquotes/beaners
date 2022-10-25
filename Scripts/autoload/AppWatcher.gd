@@ -1,7 +1,5 @@
 extends Node
 
-var paused = false
-
 func _ready():
 	get_tree().set_auto_accept_quit(false)
 	print("Initialized Application watcher")
@@ -12,17 +10,6 @@ func _notification(what):
 			# Save configuration then quit
 			ConfigWatcher.save()
 			get_tree().quit()
-
-func pause():
-	paused = true
-	get_tree().set_pause(true)
-
-func resume():
-	paused = false
-	get_tree().set_pause(false)
-
-func is_paused() -> bool:
-	return paused
 
 func quit():
 	# A wrapper function for exiting the game

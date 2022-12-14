@@ -31,8 +31,8 @@ onready var Head = $"Head"
 onready var Camera = $"Head/Camera"
 
 func _ready():
-	# Hide the mouse cursor if not hidden
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	# Notify the interface that the game is in session
+	Interface.is_in_session = true
 
 func _input(event):
 	# Receive mouse movement for camera rotation
@@ -41,6 +41,7 @@ func _input(event):
 		Head.rotate_x(deg2rad(-event.relative.y * camera_sensitivity))
 		Head.rotation.x = clamp(Head.rotation.x, deg2rad(-89), deg2rad(89))
 	# Receive keyboard/joystick inputs for player abilities
+	# Calls their specific variables to be handled in _physics_process
 	if event.is_action_pressed("player_jump"):
 		to_jump = true
 	if event.is_action_pressed("player_crouch"):
@@ -75,6 +76,7 @@ func _physics_process(delta):
 		acceleration = ACCELERATION_DEFAULT
 		_gravity = Vector3.ZERO
 		
+		# These calls are only executed while on floor
 		if to_jump:
 			snap = Vector3.ZERO
 			_gravity = Vector3.UP * 5
@@ -85,14 +87,16 @@ func _physics_process(delta):
 		else:
 			Collision.shape.height += 20 * delta
 			speed = 7
-		if to_aim:
-			Camera.fov = lerp(Camera.fov, 55, 0.1)
-		else:
-			Camera.fov = lerp(Camera.fov, 90, 0.1)
 	else:
 		snap = Vector3.DOWN
 		acceleration = ACCELERATION_AIR
 		_gravity += Vector3.DOWN * gravity * delta
+	
+	# Since aiming is not a big deal when on floor, it'll be applied even when not on floor
+	if to_aim:
+		Camera.fov = lerp(Camera.fov, 55, 0.3)
+	else:
+		Camera.fov = lerp(Camera.fov, 90, 0.3)
 	
 	# Finalize the normalized movement and other stuff
 	Collision.shape.height = clamp(Collision.shape.height, 0.5, 1.5)

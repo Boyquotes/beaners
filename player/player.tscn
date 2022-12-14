@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://player/player.gd" type="Script" id=1]
+[ext_resource path="res://joystick/virtual_joystick.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CapsuleShape" id=3]
 radius = 0.5
@@ -25,3 +26,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
 [node name="Camera" type="Camera" parent="Head"]
 current = true
 fov = 90.0
+
+[node name="HUD" type="Node" parent="."]
+
+[node name="Joystick" parent="HUD" instance=ExtResource( 2 )]
+margin_left = 28.0
+margin_top = -225.0
+margin_right = 228.0
+margin_bottom = -25.0
+visibility_mode = 1
+action_left = "player_move_left"
+action_right = "player_move_right"
+action_up = "player_move_up"
+action_down = "player_move_down"

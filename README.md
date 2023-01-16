@@ -1,8 +1,8 @@
 # Beaners
 A hobby game made in Godot Engine where you play as a bean... with your friends!
 
-## Rewrite
-This project has been previously halted, but the creator decided to bring it back to re-write the important parts.
+## Deprecated
+This game is no longer maintained due to slow development, may this game rest in peace.
 
 ## To-Do (Re-write)
 - Multiplayer (0%)

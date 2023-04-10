@@ -1,0 +1,136 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Scripts/menu/LobbyMenu.gd" type="Script" id=1]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://Assets/fonts/Extrude.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://Assets/fonts/DotGothic16.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+size = 24
+font_data = SubResource( 3 )
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://Assets/fonts/DotGothic16.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+font_data = SubResource( 5 )
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxFlat" id=8]
+content_margin_left = 8.0
+content_margin_right = 8.0
+bg_color = Color( 0.237305, 0.0785608, 0.0785608, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="LobbyMenu" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="BackgroundColor" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0.282353, 0.0941176, 0.0941176, 1 )
+
+[node name="Root" type="VBoxContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+
+[node name="SpaceContents" type="Control" parent="Root"]
+margin_right = 1024.0
+margin_bottom = 516.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContents" type="MarginContainer" parent="Root"]
+margin_top = 520.0
+margin_right = 1024.0
+margin_bottom = 600.0
+custom_constants/margin_right = 32
+custom_constants/margin_top = 16
+custom_constants/margin_left = 32
+custom_constants/margin_bottom = 16
+
+[node name="Contents" type="HBoxContainer" parent="Root/MarginContents"]
+margin_left = 32.0
+margin_top = 16.0
+margin_right = 992.0
+margin_bottom = 64.0
+custom_constants/separation = 20
+
+[node name="Header" type="Label" parent="Root/MarginContents/Contents"]
+margin_right = 108.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 2 )
+text = "Play"
+
+[node name="JoinOption" type="Label" parent="Root/MarginContents/Contents"]
+margin_left = 128.0
+margin_top = 6.0
+margin_right = 176.0
+margin_bottom = 41.0
+mouse_filter = 0
+custom_fonts/font = SubResource( 4 )
+text = "Join"
+
+[node name="HostOption" type="Label" parent="Root/MarginContents/Contents"]
+margin_left = 196.0
+margin_top = 6.0
+margin_right = 244.0
+margin_bottom = 41.0
+mouse_filter = 0
+custom_fonts/font = SubResource( 4 )
+text = "Host"
+
+[node name="BackOption" type="Label" parent="Root/MarginContents/Contents"]
+margin_left = 264.0
+margin_top = 6.0
+margin_right = 312.0
+margin_bottom = 41.0
+mouse_filter = 0
+custom_fonts/font = SubResource( 4 )
+text = "Back"
+
+[node name="Spacer" type="Control" parent="Root/MarginContents/Contents"]
+margin_left = 332.0
+margin_right = 684.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+
+[node name="PlayerName" type="LineEdit" parent="Root/MarginContents/Contents"]
+margin_left = 704.0
+margin_top = 12.0
+margin_right = 960.0
+margin_bottom = 36.0
+size_flags_vertical = 4
+custom_constants/minimum_spaces = 30
+custom_fonts/font = SubResource( 6 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
+max_length = 30
+placeholder_text = "Player name"
+caret_blink = true
+
+[connection signal="gui_input" from="Root/MarginContents/Contents/JoinOption" to="." method="_on_JoinOption_gui_input"]
+[connection signal="mouse_entered" from="Root/MarginContents/Contents/JoinOption" to="." method="_on_JoinOption_mouse_entered"]
+[connection signal="mouse_exited" from="Root/MarginContents/Contents/JoinOption" to="." method="_on_JoinOption_mouse_exited"]
+[connection signal="gui_input" from="Root/MarginContents/Contents/HostOption" to="." method="_on_HostOption_gui_input"]
+[connection signal="mouse_entered" from="Root/MarginContents/Contents/HostOption" to="." method="_on_HostOption_mouse_entered"]
+[connection signal="mouse_exited" from="Root/MarginContents/Contents/HostOption" to="." method="_on_HostOption_mouse_exited"]
+[connection signal="gui_input" from="Root/MarginContents/Contents/BackOption" to="." method="_on_BackOption_gui_input"]
+[connection signal="mouse_entered" from="Root/MarginContents/Contents/BackOption" to="." method="_on_BackOption_mouse_entered"]
+[connection signal="mouse_exited" from="Root/MarginContents/Contents/BackOption" to="." method="_on_BackOption_mouse_exited"]
+[connection signal="focus_entered" from="Root/MarginContents/Contents/PlayerName" to="." method="_on_PlayerName_focus_entered"]
+[connection signal="focus_exited" from="Root/MarginContents/Contents/PlayerName" to="." method="_on_PlayerName_focus_exited"]
+[connection signal="text_changed" from="Root/MarginContents/Contents/PlayerName" to="." method="_on_PlayerName_text_changed"]

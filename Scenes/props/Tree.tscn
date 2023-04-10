@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/models/tree.obj" type="ArrayMesh" id=1]
+
+[sub_resource type="CylinderShape" id=1]
+height = 7.62907
+radius = 1.55396
+
+[node name="Tree" type="StaticBody"]
+
+[node name="Mesh" type="MeshInstance" parent="."]
+mesh = ExtResource( 1 )
+skeleton = NodePath("")
+
+[node name="Collision" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 3.66954, 1.4 )
+shape = SubResource( 1 )

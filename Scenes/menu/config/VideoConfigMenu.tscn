@@ -1,0 +1,296 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Scripts/menu/config/VideoConfigMenu.gd" type="Script" id=1]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://Assets/fonts/Extrude.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://Assets/fonts/DotGothic16.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+size = 24
+font_data = SubResource( 3 )
+
+[sub_resource type="DynamicFontData" id=7]
+font_path = "res://Assets/fonts/DotGothic16.ttf"
+
+[sub_resource type="DynamicFont" id=8]
+size = 32
+font_data = SubResource( 7 )
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://Assets/fonts/DotGothic16.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 24
+font_data = SubResource( 5 )
+
+[sub_resource type="DynamicFontData" id=17]
+font_path = "res://Assets/fonts/DotGothic16.ttf"
+
+[sub_resource type="DynamicFont" id=18]
+font_data = SubResource( 17 )
+
+[sub_resource type="StyleBoxFlat" id=19]
+bg_color = Color( 0.239216, 0.0784314, 0.0784314, 1 )
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="DynamicFontData" id=20]
+font_path = "res://Assets/fonts/DotGothic16.ttf"
+
+[sub_resource type="DynamicFont" id=21]
+size = 24
+font_data = SubResource( 20 )
+
+[sub_resource type="StyleBoxLine" id=22]
+color = Color( 0.239216, 0.0784314, 0.0784314, 1 )
+thickness = 10
+
+[sub_resource type="StyleBoxLine" id=23]
+color = Color( 0.34902, 0.113725, 0.113725, 1 )
+thickness = 10
+
+[node name="VideoConfigMenu" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="BackgroundColor" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0.282353, 0.0941176, 0.0941176, 1 )
+
+[node name="Root" type="VBoxContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+
+[node name="MarginContents" type="MarginContainer" parent="Root"]
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_left = 32
+custom_constants/margin_bottom = 32
+
+[node name="Contents" type="VBoxContainer" parent="Root/MarginContents"]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 992.0
+margin_bottom = 568.0
+
+[node name="NavigationContents" type="HBoxContainer" parent="Root/MarginContents/Contents"]
+margin_right = 960.0
+margin_bottom = 48.0
+
+[node name="Header" type="Label" parent="Root/MarginContents/Contents/NavigationContents"]
+margin_right = 132.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 2 )
+text = "Video"
+
+[node name="Spacer" type="Control" parent="Root/MarginContents/Contents/NavigationContents"]
+margin_left = 136.0
+margin_right = 908.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+
+[node name="BackOption" type="Label" parent="Root/MarginContents/Contents/NavigationContents"]
+margin_left = 912.0
+margin_top = 6.0
+margin_right = 960.0
+margin_bottom = 41.0
+mouse_filter = 0
+custom_fonts/font = SubResource( 4 )
+text = "Back"
+
+[node name="DisplaySubheader" type="Label" parent="Root/MarginContents/Contents"]
+margin_top = 52.0
+margin_right = 960.0
+margin_bottom = 100.0
+custom_fonts/font = SubResource( 8 )
+text = "Display"
+
+[node name="ModeOption" type="HBoxContainer" parent="Root/MarginContents/Contents"]
+margin_top = 104.0
+margin_right = 960.0
+margin_bottom = 139.0
+
+[node name="ModeOptionLabel" type="Label" parent="Root/MarginContents/Contents/ModeOption"]
+margin_right = 204.0
+margin_bottom = 35.0
+custom_fonts/font = SubResource( 6 )
+text = "Mode             "
+
+[node name="Spacer" type="Control" parent="Root/MarginContents/Contents/ModeOption"]
+margin_left = 208.0
+margin_right = 582.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+
+[node name="ModeOptionMenu" type="OptionButton" parent="Root/MarginContents/Contents/ModeOption"]
+margin_left = 586.0
+margin_right = 960.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 18 )
+custom_styles/hover = SubResource( 19 )
+custom_styles/pressed = SubResource( 19 )
+custom_styles/focus = SubResource( 19 )
+custom_styles/disabled = SubResource( 19 )
+custom_styles/normal = SubResource( 19 )
+text = "Windowed"
+align = 1
+items = [ "Windowed", null, false, 0, null, "Fullscreen", null, false, 1, null, "Borderless Fullscreen", null, false, 2, null ]
+selected = 0
+
+[node name="VsyncOption" type="HBoxContainer" parent="Root/MarginContents/Contents"]
+margin_top = 143.0
+margin_right = 960.0
+margin_bottom = 178.0
+
+[node name="VsyncOptionLabel" type="Label" parent="Root/MarginContents/Contents/VsyncOption"]
+margin_right = 144.0
+margin_bottom = 35.0
+custom_fonts/font = SubResource( 6 )
+text = "Enable VSync"
+
+[node name="Spacer" type="Control" parent="Root/MarginContents/Contents/VsyncOption"]
+margin_left = 148.0
+margin_right = 932.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+
+[node name="VsyncOptionBox" type="CheckBox" parent="Root/MarginContents/Contents/VsyncOption"]
+margin_left = 936.0
+margin_right = 960.0
+margin_bottom = 35.0
+
+[node name="GraphicsSubheader" type="Label" parent="Root/MarginContents/Contents"]
+margin_top = 182.0
+margin_right = 960.0
+margin_bottom = 230.0
+custom_fonts/font = SubResource( 8 )
+text = "Graphics"
+
+[node name="ShadowsOption" type="HBoxContainer" parent="Root/MarginContents/Contents"]
+margin_top = 234.0
+margin_right = 960.0
+margin_bottom = 269.0
+
+[node name="ShadowsOptionLabel" type="Label" parent="Root/MarginContents/Contents/ShadowsOption"]
+margin_right = 204.0
+margin_bottom = 35.0
+custom_fonts/font = SubResource( 6 )
+text = "Shadow Quality   "
+
+[node name="Spacer" type="Control" parent="Root/MarginContents/Contents/ShadowsOption"]
+margin_left = 208.0
+margin_right = 582.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+
+[node name="ShadowsOptionMenu" type="OptionButton" parent="Root/MarginContents/Contents/ShadowsOption"]
+margin_left = 586.0
+margin_right = 960.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 18 )
+custom_styles/hover = SubResource( 19 )
+custom_styles/pressed = SubResource( 19 )
+custom_styles/focus = SubResource( 19 )
+custom_styles/disabled = SubResource( 19 )
+custom_styles/normal = SubResource( 19 )
+text = "Medium"
+align = 1
+items = [ "Off", null, false, 0, null, "Low", null, false, 1, null, "Medium", null, false, 2, null, "High", null, false, 3, null ]
+selected = 2
+
+[node name="TexturesOption" type="HBoxContainer" parent="Root/MarginContents/Contents"]
+margin_top = 273.0
+margin_right = 960.0
+margin_bottom = 308.0
+
+[node name="TexturesOptionLabel" type="Label" parent="Root/MarginContents/Contents/TexturesOption"]
+margin_right = 204.0
+margin_bottom = 35.0
+custom_fonts/font = SubResource( 6 )
+text = "Texture Quality  "
+
+[node name="Spacer" type="Control" parent="Root/MarginContents/Contents/TexturesOption"]
+margin_left = 208.0
+margin_right = 582.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+
+[node name="TexturesOptionMenu" type="OptionButton" parent="Root/MarginContents/Contents/TexturesOption"]
+margin_left = 586.0
+margin_right = 960.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 18 )
+custom_styles/hover = SubResource( 19 )
+custom_styles/pressed = SubResource( 19 )
+custom_styles/focus = SubResource( 19 )
+custom_styles/disabled = SubResource( 19 )
+custom_styles/normal = SubResource( 19 )
+text = "High"
+align = 1
+items = [ "Low", null, false, 0, null, "Medium", null, false, 1, null, "High", null, false, 2, null ]
+selected = 2
+
+[node name="UISubheader" type="Label" parent="Root/MarginContents/Contents"]
+margin_top = 312.0
+margin_right = 960.0
+margin_bottom = 360.0
+custom_fonts/font = SubResource( 8 )
+text = "User Interface"
+
+[node name="ScaleOption" type="HBoxContainer" parent="Root/MarginContents/Contents"]
+margin_top = 364.0
+margin_right = 960.0
+margin_bottom = 399.0
+
+[node name="ScaleOptionLabel" type="Label" parent="Root/MarginContents/Contents/ScaleOption"]
+margin_right = 60.0
+margin_bottom = 35.0
+custom_fonts/font = SubResource( 21 )
+text = "Scale"
+
+[node name="Spacer" type="Control" parent="Root/MarginContents/Contents/ScaleOption"]
+margin_left = 64.0
+margin_right = 510.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+
+[node name="ScaleOptionSlider" type="HSlider" parent="Root/MarginContents/Contents/ScaleOption"]
+margin_left = 514.0
+margin_right = 960.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/slider = SubResource( 22 )
+custom_styles/grabber_area_highlight = SubResource( 23 )
+custom_styles/grabber_area = SubResource( 23 )
+min_value = 0.5
+max_value = 1.5
+step = 0.1
+value = 0.8
+
+[connection signal="gui_input" from="Root/MarginContents/Contents/NavigationContents/BackOption" to="." method="_on_BackOption_gui_input"]
+[connection signal="mouse_entered" from="Root/MarginContents/Contents/NavigationContents/BackOption" to="." method="_on_BackOption_mouse_entered"]
+[connection signal="mouse_exited" from="Root/MarginContents/Contents/NavigationContents/BackOption" to="." method="_on_BackOption_mouse_exited"]
+[connection signal="item_selected" from="Root/MarginContents/Contents/ModeOption/ModeOptionMenu" to="." method="_on_ModeOptionMenu_item_selected"]
+[connection signal="toggled" from="Root/MarginContents/Contents/VsyncOption/VsyncOptionBox" to="." method="_on_VsyncOptionBox_toggled"]
+[connection signal="item_selected" from="Root/MarginContents/Contents/ShadowsOption/ShadowsOptionMenu" to="." method="_on_ShadowsOptionMenu_item_selected"]
+[connection signal="item_selected" from="Root/MarginContents/Contents/TexturesOption/TexturesOptionMenu" to="." method="_on_TexturesOptionMenu_item_selected"]
+[connection signal="value_changed" from="Root/MarginContents/Contents/ScaleOption/ScaleOptionSlider" to="." method="_on_ScaleOptionSlider_value_changed"]
